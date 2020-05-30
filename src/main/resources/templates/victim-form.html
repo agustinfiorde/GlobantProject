@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head">
+</head>
+
+<body class="hold-transition skin-blue-light sidebar-mini">
+
+	<div class="wrapper">
+
+		<div th:replace="fragments/header :: header">...</div>
+		<div th:replace="fragments/menu :: menu">...</div>
+
+
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<h1>
+					ODS <small>Utilice este módulo para gestionar Objetivos de Desarrollo Sostenible.</small>
+				</h1>
+				<ol class="breadcrumb">
+					<li><a href="#">
+							<i class="fa fa-dashboard"></i>
+							Home
+						</a></li>
+					<li><a href="#">MapUncu</a></li>
+					<li class="active">ODS</li>
+				</ol>
+			</section>
+
+			<!-- Main content -->
+			<section class="content">
+
+				<!-- Default box -->
+				<div class="box">
+					<div class="box-header with-border">
+						<h3 class="box-title" style="margin-top: 10px;">Actualizar ODS</h3>
+					</div>
+					<div class="box-body">
+
+						<div th:if="${error != null}" class="alert alert-danger" role="alert">
+							<strong>¡Error!</strong> <span th:text="${error}">error</span>
+						</div>
+
+						<div th:if="${accion == 'eliminar'}" class="alert alert-danger" role="alert">
+							<strong>¡Alto!</strong> ¿Se encuentra seguro de que desea proceder con la eliminación del ods?
+						</div>
+
+						<div th:if="${accion == 'recuperar'}" class="alert alert-danger" role="alert">
+							<strong>¡Alto!</strong> ¿Se encuentra seguro de que desea proceder con la recuperación del ods?
+						</div>
+
+						<form class="vertical-form" id="formulario" method="POST" th:action="@{/ods/} + ${accion == null or accion == 'actualizar' ? 'guardar' : accion}" th:object="${ods}">
+
+							<input type="hidden" class="form-control" th:field="*{id}" th:value="*{id}" />
+							
+							<div class="form-group">
+								<label for="nombre">Numero</label>
+								<input type="text" class="form-control" id="nombre" placeholder="Ingrese el numero del ODS" th:field="*{numero}" th:value="*{numero}" th:disabled="${accion == 'eliminar'}" />
+							</div>
+							
+							<div class="form-group">
+								<label for="nombre">Nombre</label>
+								<input type="text" class="form-control" id="nombre" placeholder="Ingrese el nombre del ODS" th:field="*{nombre}" th:value="*{nombre}" th:disabled="${accion == 'eliminar'}" />
+							</div>
+
+							<div class="form-group">
+								<label for="nombre">Descripción</label>
+								<textarea class="form-control" id="descripcion" th:field="*{descripcion}" th:value="*{descripcion}" rows="5" th:disabled="${accion == 'eliminar'}"></textarea>
+							</div>
+
+						</form>
+
+						<button type="submit" class="btn btn-danger" form="formulario" th:if="${accion == 'eliminar'}">Eliminar</button>
+						<button type="submit" class="btn btn-success" form="formulario" th:if="${accion == null or accion == 'guardar'}">Guardar</button>
+						<button type="submit" class="btn btn-primary" form="formulario" th:if="${accion == 'actualizar'}">Actualizar</button>
+
+						<a th:href="@{/ods/listado}">
+							<button type="button" class="btn btn-default">Cancelar</button>
+						</a>
+					</div>
+				</div>
+
+			</section>
+		</div>
+		<div th:replace="fragments/footer :: footer">...</div>
+	</div>
+	</body>
+</html>
