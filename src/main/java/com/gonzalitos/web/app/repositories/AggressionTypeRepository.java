@@ -1,9 +1,9 @@
 package com.gonzalitos.web.app.repositories;
 
-import java.awt.print.Pageable;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -30,7 +30,7 @@ public interface AggressionTypeRepository extends JpaRepository<AggressionType, 
 	@Query("SELECT a from AggressionType a WHERE a.remove IS NULL ORDER BY a.name")
 	public List<AggressionType> searchActives();
 	
-	@Query("SELECT a from Victim a WHERE a.remove IS NULL AND a.name LIKE :name")
+	@Query("SELECT a from AggressionType a WHERE a.remove IS NULL AND a.name LIKE :name")
 	public Page<AggressionType> searchActives(Pageable pageable, @Param("name") String name);
 	
 }

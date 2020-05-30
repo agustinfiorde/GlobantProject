@@ -1,9 +1,9 @@
 package com.gonzalitos.web.app.repositories;
 
-import java.awt.print.Pageable;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -26,7 +26,7 @@ public interface AggressorRepository extends JpaRepository<Aggressor, String>, P
 	
 	@Query("SELECT a from Aggressor a WHERE a.remove IS NULL")
 	public Page<Aggressor> findActives(Pageable pageable);
-
+	
 	@Query("SELECT a from Aggressor a WHERE a.remove IS NULL ORDER BY a.name")
 	public List<Aggressor> findActives();
 	

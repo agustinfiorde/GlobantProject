@@ -39,7 +39,7 @@ public class UserController extends OwnController {
 	}
 
 	@PostMapping("/save")
-	public String guardar(HttpSession session, @Valid @ModelAttribute(USER_LABEL) UserModel m, BindingResult result, ModelMap modelo) {
+	public String save(HttpSession session, @Valid @ModelAttribute(USER_LABEL) UserModel m, BindingResult result, ModelMap modelo) {
 		log.info("METODO: user.save() -- PARAMETROS: " + m);
 		try {
 			if (result.hasErrors()) {
@@ -58,7 +58,7 @@ public class UserController extends OwnController {
 	}
 
 	@PostMapping("/delete")
-	public String eliminar(@ModelAttribute(USER_LABEL) UserModel m, ModelMap model) {
+	public String delete(@ModelAttribute(USER_LABEL) UserModel m, ModelMap model) {
 		log.info("METODO: user.delete() -- PARAMETROS: " + m);
 		model.addAttribute(ACCION_LABEL, "eliminar");
 		try {
@@ -71,7 +71,7 @@ public class UserController extends OwnController {
 	}
 
 	@GetMapping("/form")
-	public ModelAndView formulario(@RequestParam(required = false) String id, @RequestParam(required = false) String accion) {
+	public ModelAndView form(@RequestParam(required = false) String id, @RequestParam(required = false) String accion) {
 		ModelAndView model = new ModelAndView(formView);
 		UserModel user = new UserModel();
 		if (accion == null || accion.isEmpty()) {

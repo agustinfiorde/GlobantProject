@@ -2,14 +2,10 @@ package com.gonzalitos.web.app.entities;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -20,36 +16,26 @@ import lombok.Data;
 
 @Data
 @Entity
-public class HelpRequest implements Serializable{
+public class File implements Serializable{
 
+	
 	private static final long serialVersionUID = 6522896498689132123L;
 
 	@Id
 	@GeneratedValue(generator = "uuid")
 	@GenericGenerator(name = "uuid", strategy = "uuid2")
 	private String id;
-
-	private String address;
 	
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date factTime;
-
-	@ManyToMany
-	private List<AggressionType> typesOfViolences;
-	
-//	@OneToOne
-//	private Victim victim;
+	private byte[] photo;
 	
 	@ManyToOne
-	private Aggressor aggressor;
-	
-//	@ManyToOne
-//	private Relationship relationship;
-	
-	@Lob
-	@Column(name = "description", length = 4000)
-	private String description;
+	private HelpRequest helpRequest; 
 	
 	@Temporal(TemporalType.TIMESTAMP)
+	private Date registered;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date edited;
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date remove;
+	
 }

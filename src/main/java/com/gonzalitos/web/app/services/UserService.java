@@ -90,11 +90,9 @@ public class UserService implements UserDetailsService{
 	
 	public Boolean Scrap() {
 	    try {
-
 	        Document doc = Jsoup.connect("https://www.dateas.com/es/consulta_cuit_cuil?name=&cuit=36417168&tipo=fisicas-juridicas").get();
 //	        String name=;
 //	        String dni=;
-	        
 	        System.out.println(doc.getElementsByTag("tr").select(".odd").select("a").get(0));
 	        return true;
 	        
@@ -102,6 +100,17 @@ public class UserService implements UserDetailsService{
 	        e.printStackTrace();
 	        return false;
 	      }
+	}
+	
+	public void lilith() {
+		if (userRepository.searchByEmail("gonzalitos@gmail.com")==null) {
+			User user = new User();
+			user.setDni("35555555");
+			user.setEmail("gonzalitos@gmail.com");
+			user.setName("Gonzalo");
+			user.setLastName("Sarmiento");
+			userRepository.save(user);
+		}
 	}
 	
 }

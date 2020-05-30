@@ -1,10 +1,13 @@
 package com.gonzalitos.web.app.services;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.gonzalitos.web.app.converters.AggressorConverter;
@@ -36,13 +39,32 @@ public class AggressorService {
 
 	@Transactional
 	public Aggressor delete(String id) throws WebException {
-		Aggressor financiamiento = aggressorRepository.getOne(id);
-		if (financiamiento.getRemove() == null) {
-			financiamiento.setRemove(new Date());
-			financiamiento = aggressorRepository.save(financiamiento);
+		Aggressor aggressor = aggressorRepository.getOne(id);
+		if (aggressor.getRemove() == null) {
+			aggressor.setRemove(new Date());
+			aggressor = aggressorRepository.save(aggressor);
 		} else {
 			throw new WebException("El agresor que intenta eliminar ya se encuentra dado de baja.");
 		}
-		return financiamiento;
+		return aggressor;
 	}
+
+//	public Page<Aggressor> toList(Pageable paginable, String q) {
+//		return aggressorRepository.findActives(paginable, "%" + q + "%");
+//	}
+
+	public Page<Aggressor> toList(Pageable paginable) {
+		return aggressorRepository.findActives(paginable);
+	}
+	
+	public List<Aggressor> toList() {
+		return aggressorRepository.findActives();
+	}
+	
+	public AggressorModel search(String id) {
+		Aggressor aggressor = aggressorRepository.getOne(id);
+		return aggressorConverter.entityToModel(aggressor);
+	}
+		
 }
+
