@@ -11,7 +11,9 @@ public class FileModel {
 	
 	private byte[] photo;
 	
-   private Date registered;
+	private HelpRequestModel helpRequestModel;
+	
+    private Date registered;
 	
 	private Date edited;
 	
