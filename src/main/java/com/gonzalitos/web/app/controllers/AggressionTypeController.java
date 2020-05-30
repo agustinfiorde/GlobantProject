@@ -5,11 +5,16 @@ import static com.gonzalitos.web.app.utils.Texts.AGGRESSOR_LABEL;
 import static com.gonzalitos.web.app.utils.Texts.ERROR;
 import static com.gonzalitos.web.app.utils.Texts.SAVE_LABEL;
 import static com.gonzalitos.web.app.utils.Texts.UNEXPECTED_ERROR;
+import static com.gonzalitos.web.app.utils.Texts.QUERY_LABEL;
+import static com.gonzalitos.web.app.utils.Texts.PAGE_LABEL;
+import static com.gonzalitos.web.app.utils.Texts.URL_LABEL;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -21,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.gonzalitos.web.app.entities.AggressionType;
 import com.gonzalitos.web.app.errors.WebException;
 import com.gonzalitos.web.app.models.AggressionTypeModel;
 import com.gonzalitos.web.app.services.AggressionTypeService;
@@ -87,6 +93,25 @@ public class AggressionTypeController extends OwnController {
 	}
 
 
+	@GetMapping("/list")
+	public ModelAndView listar(HttpSession session, Pageable paginable, @RequestParam(required = false) String q) {
+		ModelAndView modelo = new ModelAndView(listView);
+
+		Page<AggressionType> page = null;
+		if (q == null || q.isEmpty()) {
+			page = aggressiontypeService.toList(paginable);
+		} else {
+			page = aggressiontypeService.toList(paginable, q);
+			modelo.addObject(QUERY_LABEL, q);
+		}
+		modelo.addObject(PAGE_LABEL, page);
+
+		log.info("METODO: aggressionType.toList() -- PARAMETROS: " + paginable);
+
+		modelo.addObject(URL_LABEL, "/aggressiontype/list");
+		modelo.addObject(AGGRESSOR_LABEL, new AggressionTypeModel());
+		return modelo;
+	}
 
 
 }
