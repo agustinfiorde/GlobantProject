@@ -3,6 +3,7 @@ package com.gonzalitos.web.app.services;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gonzalitos.web.app.entities.File;
+import com.gonzalitos.web.app.entities.HelpRequest;
 import com.gonzalitos.web.app.repositories.FileRepository;
 
 public class FileService {
@@ -10,11 +11,13 @@ public class FileService {
 	@Autowired
 	private FileRepository fileRepository;
 	
-	public void save(byte[] photo) {
+	public File save(byte[] photo, HelpRequest helpRequest) {
 		File file = new File();
 		
 		file.setPhoto(photo);
-		fileRepository.save(file);
+		file.setHelpRequest(helpRequest);
+		
+		return fileRepository.save(file);
 		
 	}
 }
