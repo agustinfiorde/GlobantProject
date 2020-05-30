@@ -2,8 +2,7 @@ package com.gonzalitos.web.app.utils;
 
 public final class Texts {
 
-	private Texts() {
-	}
+	private Texts() {}
 	
 	public static final String AGGRESSOR_LABEL = "aggressor";
 
