@@ -3,12 +3,10 @@
 <head th:replace="fragments/fronttemplates :: headfront"></head>
 
 <body>
-
-
 	<div class="wrapper">
-
+		<!-- ======= Header ======= -->
 		<header th:replace="fragments/fronttemplates :: headerfront">...</header>
-		<!-- 		Body -->
+		<!-- End Header -->
 
 		<main id="main"> <!-- ======= Breadcrumbs ======= -->
 		<div class="breadcrumbs" data-aos="fade-in">
@@ -63,8 +61,8 @@
 								</div>
 
 								<div class="col-md-6 custom-switch">
-									<input type="checkbox" class="custom-control-input" id="whistleblower" /> <label
-										class="custom-control-label" for="whistleblower">Sos la victima?</label>
+									<input type="checkbox" class="custom-control-input" id="whistleblower" /> <label class="custom-control-label"
+										for="whistleblower">Sos la victima?</label>
 								</div>
 							</div>
 							<!-- Agresor -->
@@ -105,8 +103,8 @@
 							</div>
 
 							<div class="form-group custom-file">
-								<input type="file" class="custom-file-input" id="customFile" /> <label class="custom-file-label"
-									for="customFile">Seleccionar foto</label>
+								<input type="file" class="custom-file-input" id="customFile" /> <label class="custom-file-label" for="customFile">Seleccionar
+									foto</label>
 							</div>
 
 							<div class="mb-3">
@@ -125,22 +123,9 @@
 		<!-- End Contact Section --> </main>
 		<!-- End #main -->
 
-		<!-- ======= Hero Section ======= -->
-		<section id="hero" class="d-flex justify-content-center align-items-center">
-			<div class="container position-relative" data-aos="zoom-in" data-aos-delay="100">
-				<h1>
-					Registralo hoy,<br />Vendelo Ma&ntilde;ana.
-				</h1>
-				<h2>Encontra y vende todo tipo de calzado.</h2>
-				<h2>Somos una empresa dedicada a ofrecer productos y ayudarte</h2>
-				<a href="courses.html" class="btn-get-emergency">Emergencia</a> <a href="courses.html" class="btn-get-started">Registrar</a>
-			</div>
-		</section>
-		<!-- End Hero -->
-
-
-
+		<!-- ======= Footer ======= -->
 		<footer th:replace="fragments/fronttemplates :: footerfront">...</footer>
+		<!-- End Footer -->
 
 		<a href="#" class="back-to-top"><i class="bx bx-up-arrow-alt"></i></a>
 		<div id="preloader"></div>
@@ -159,5 +144,4 @@
 		<script src="/assets/js/main.js"></script>
 	</div>
 </body>
-
 </html>

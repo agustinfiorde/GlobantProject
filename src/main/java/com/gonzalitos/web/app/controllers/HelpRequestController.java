@@ -22,7 +22,6 @@ import com.gonzalitos.web.app.models.HelpRequestModel;
 import com.gonzalitos.web.app.services.HelpRequestService;
 
 @Controller
-@PreAuthorize("hasRole('ROLE_ADMIN')")
 @RequestMapping("/helprequest")
 public class HelpRequestController extends OwnController {
 	
@@ -30,7 +29,7 @@ public class HelpRequestController extends OwnController {
 	private HelpRequestService helpRequestService;
 	
 	public HelpRequestController() {
-		super("helprequest-list", "helprequest-form");
+		super("frontend/helprequest-list", "frontend/helprequest-form");
 	}
 
 	@PostMapping("/save")
