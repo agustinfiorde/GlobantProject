@@ -13,6 +13,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +22,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.gonzalitos.web.app.converters.UserConverter;
 import com.gonzalitos.web.app.entities.User;
+import com.gonzalitos.web.app.enums.Roles;
 import com.gonzalitos.web.app.errors.WebException;
 import com.gonzalitos.web.app.models.UserModel;
 import com.gonzalitos.web.app.repositories.UserRepository;
@@ -67,6 +69,20 @@ public class UserService implements UserDetailsService{
 	public User authentication() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		return userRepository.searchByEmail(auth.getName());
+	}
+	
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { WebException.class, Exception.class })
+	public void lilith() {
+		if (userRepository.searchByEmail("gonzalitos@gmail.com")==null) {
+			User user = new User();
+			user.setRole(Roles.ADMIN);
+			user.setDni("35555555");
+			user.setRegistered(new Date());
+			user.setPassword(new BCryptPasswordEncoder().encode("asdasdasd"));
+			user.setEmail("gonzalitos@gmail.com");
+			
+			userRepository.save(user);
+		}
 	}
 
 	@Override

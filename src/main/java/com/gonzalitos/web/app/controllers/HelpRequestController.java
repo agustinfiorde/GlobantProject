@@ -34,7 +34,7 @@ public class HelpRequestController extends OwnController {
 	}
 
 	@PostMapping("/save")
-	public String guardar(HttpSession session, @Valid @ModelAttribute(AGGRESSOR_LABEL) HelpRequestModel m, BindingResult result, ModelMap modelo) {
+	public String save(HttpSession session, @Valid @ModelAttribute(AGGRESSOR_LABEL) HelpRequestModel m, BindingResult result, ModelMap modelo) {
 		log.info("METODO: helpRequest.save() -- PARAMETROS: " + m);
 		try {
 			if (result.hasErrors()) {
@@ -53,7 +53,7 @@ public class HelpRequestController extends OwnController {
 	}
 
 	@PostMapping("/delete")
-	public String eliminar(@ModelAttribute(AGGRESSOR_LABEL) HelpRequestModel m, ModelMap model) {
+	public String delete(@ModelAttribute(AGGRESSOR_LABEL) HelpRequestModel m, ModelMap model) {
 		log.info("METODO: helpRequest.delete() -- PARAMETROS: " + m);
 		model.addAttribute(ACCION_LABEL, "eliminar");
 		try {
@@ -66,7 +66,7 @@ public class HelpRequestController extends OwnController {
 	}
 
 	@GetMapping("/form")
-	public ModelAndView formulario(@RequestParam(required = false) String id, @RequestParam(required = false) String accion) {
+	public ModelAndView form(@RequestParam(required = false) String id, @RequestParam(required = false) String accion) {
 		ModelAndView model = new ModelAndView(formView);
 		HelpRequestModel helpRequest = new HelpRequestModel();
 		if (accion == null || accion.isEmpty()) {

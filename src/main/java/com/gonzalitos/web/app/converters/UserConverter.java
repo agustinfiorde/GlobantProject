@@ -46,9 +46,9 @@ public class UserConverter  extends OwnConverter<UserModel, User>{
 		return user;
 	}
 	
-	public List<UserModel> entitiesToModels(List<User> financiamientos ){
+	public List<UserModel> entitiesToModels(List<User> entities ){
 		List<UserModel> model = new ArrayList<>();
-		for(User a : financiamientos){
+		for(User a : entities){
 			model.add(entityToModel(a));
 		}
 		return model;

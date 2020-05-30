@@ -44,11 +44,11 @@ public abstract class OwnController {
 	}
 
 	public boolean isAdministrador() {
-		return getRol().equals("ROLE_ADMINISTRADOR");
+		return getRol().equals("ROLE_ADMIN");
 	}
 
 	public boolean isAdministrativo() {
-		return getRol().equals("ROLE_ADMINISTRATIVO");
+		return getRol().equals("ROLE_ADMIN");
 	}
 
 	public void error(ModelAndView model, Exception e) {

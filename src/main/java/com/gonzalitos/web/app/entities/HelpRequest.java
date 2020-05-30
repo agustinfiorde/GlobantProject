@@ -1,16 +1,26 @@
 package com.gonzalitos.web.app.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.GenericGenerator;
 
 import lombok.Data;
 
 @Data
-public class HelpRequest {
+@Entity
+public class HelpRequest implements Serializable{
 
 	private static final long serialVersionUID = 6522896498689132123L;
 
@@ -27,14 +37,14 @@ public class HelpRequest {
 	@ManyToMany
 	private List<AggressionType> typesOfViolences;
 	
-	@OneToOne
-	private Victim victim;
+//	@OneToOne
+//	private Victim victim;
 	
 	@ManyToOne
 	private Aggressor aggressor;
 	
-	@ManyToOne
-	private Relationship relationship;
+//	@ManyToOne
+//	private Relationship relationship;
 	
 	@Lob
 	@Column(name = "description", length = 4000)
