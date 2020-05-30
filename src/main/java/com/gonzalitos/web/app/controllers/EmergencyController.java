@@ -15,7 +15,6 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -32,7 +31,6 @@ import com.gonzalitos.web.app.models.EmergencyModel;
 import com.gonzalitos.web.app.services.EmergencyService;
 
 @Controller
-@PreAuthorize("hasRole('ROLE_ADMIN')")
 @RequestMapping("/emergency")
 public class EmergencyController extends OwnController {
 	
@@ -110,6 +108,11 @@ public class EmergencyController extends OwnController {
 		modelo.addObject(URL_LABEL, "/emergency/list");
 		modelo.addObject(AGGRESSOR_LABEL, new EmergencyModel());
 		return modelo;
+	}
+	
+	@GetMapping("/formfront")
+	public String formFront() {
+		return "/frontend/emergencyrequest-form";
 	}
 
 

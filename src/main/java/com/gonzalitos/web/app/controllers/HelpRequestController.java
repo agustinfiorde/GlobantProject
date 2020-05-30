@@ -1,10 +1,15 @@
 package com.gonzalitos.web.app.controllers;
 
+import static com.gonzalitos.web.app.utils.Texts.ACCION_LABEL;
+import static com.gonzalitos.web.app.utils.Texts.AGGRESSOR_LABEL;
+import static com.gonzalitos.web.app.utils.Texts.ERROR;
+import static com.gonzalitos.web.app.utils.Texts.SAVE_LABEL;
+import static com.gonzalitos.web.app.utils.Texts.UNEXPECTED_ERROR;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -14,8 +19,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-import static com.gonzalitos.web.app.utils.Texts.*;
 
 import com.gonzalitos.web.app.errors.WebException;
 import com.gonzalitos.web.app.models.HelpRequestModel;
@@ -29,7 +32,7 @@ public class HelpRequestController extends OwnController {
 	private HelpRequestService helpRequestService;
 	
 	public HelpRequestController() {
-		super("frontend/helprequest-list", "frontend/helprequest-form");
+		super("helprequest-list", "helprequest-form");
 	}
 
 	@PostMapping("/save")
@@ -66,7 +69,7 @@ public class HelpRequestController extends OwnController {
 
 	@GetMapping("/form")
 	public ModelAndView form(@RequestParam(required = false) String id, @RequestParam(required = false) String accion) {
-		ModelAndView model = new ModelAndView(formView);
+		ModelAndView model = new ModelAndView("frontend/emergencyrequest-form");
 		HelpRequestModel helpRequest = new HelpRequestModel();
 		if (accion == null || accion.isEmpty()) {
 			accion = SAVE_LABEL;
@@ -79,6 +82,11 @@ public class HelpRequestController extends OwnController {
 		model.addObject(AGGRESSOR_LABEL, helpRequest);
 		model.addObject(ACCION_LABEL, accion);
 		return model;
+	}
+	
+	@GetMapping("/formfront")
+	public String formFront() {
+		return "/frontend/helprequest-form";
 	}
 
 }
