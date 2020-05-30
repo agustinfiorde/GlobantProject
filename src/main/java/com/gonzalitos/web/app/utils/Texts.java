@@ -18,6 +18,7 @@ public final class Texts {
 	public static final String SAVE_LABEL = "save";
 
 	public static final String URL_LABEL = "url";
+	public static final String USER_LABEL = "user";
 
 	public static final String SEARCH_LABEL = "search";
 
