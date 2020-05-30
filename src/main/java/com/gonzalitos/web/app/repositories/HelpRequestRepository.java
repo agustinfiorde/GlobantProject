@@ -27,7 +27,7 @@ public interface HelpRequestRepository extends JpaRepository<HelpRequest, String
 	@Query("SELECT a from HelpRequest a WHERE a.remove IS NULL ORDER BY a.factTime")
 	public List<HelpRequest> searchActives();
 	
-	@Query("SELECT a from HelpRequest a WHERE a.remove IS NULL AND a.victim LIKE :victim_id")
-	public Page<HelpRequest> searchActives(Pageable pageable, @Param("victim_id") String victim_id);
+//	@Query("SELECT a from HelpRequest a WHERE a.remove IS NULL AND a.victim LIKE :victim_id")
+//	public Page<HelpRequest> searchActives(Pageable pageable, @Param("victim_id") String victim_id);
 	
 }

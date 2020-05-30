@@ -45,4 +45,9 @@ public class AggressorService {
 		}
 		return financiamiento;
 	}
+	
+	public AggressorModel search(String id) {
+		Aggressor user = aggressorRepository.getOne(id);
+		return aggressorConverter.entityToModel(user);
+	}
 }
