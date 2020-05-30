@@ -5,11 +5,16 @@ import static com.gonzalitos.web.app.utils.Texts.AGGRESSOR_LABEL;
 import static com.gonzalitos.web.app.utils.Texts.ERROR;
 import static com.gonzalitos.web.app.utils.Texts.SAVE_LABEL;
 import static com.gonzalitos.web.app.utils.Texts.UNEXPECTED_ERROR;
+import static com.gonzalitos.web.app.utils.Texts.QUERY_LABEL;
+import static com.gonzalitos.web.app.utils.Texts.PAGE_LABEL;
+import static com.gonzalitos.web.app.utils.Texts.URL_LABEL;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -21,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.gonzalitos.web.app.entities.Aggressor;
 import com.gonzalitos.web.app.errors.WebException;
 import com.gonzalitos.web.app.models.AggressorModel;
 import com.gonzalitos.web.app.services.AggressorService;
@@ -84,5 +90,26 @@ public class AggressorController extends OwnController {
 		model.addObject(AGGRESSOR_LABEL, aggressor);
 		model.addObject(ACCION_LABEL, accion);
 		return model;
+	}
+	
+
+	@GetMapping("/list")
+	public ModelAndView listar(HttpSession session, Pageable paginable, @RequestParam(required = false) String q) {
+		ModelAndView modelo = new ModelAndView(listView);
+
+		Page<Aggressor> page = null;
+		if (q == null || q.isEmpty()) {
+			page = aggressorService.toList(paginable);
+		} else {
+//			page = aggressorService.toList(paginable, q);
+			modelo.addObject(QUERY_LABEL, q);
+		}
+		modelo.addObject(PAGE_LABEL, page);
+
+		log.info("METODO: aggressor.toList() -- PARAMETROS: " + paginable);
+
+		modelo.addObject(URL_LABEL, "/aggressor/list");
+		modelo.addObject(AGGRESSOR_LABEL, new AggressorModel());
+		return modelo;
 	}
 }
