@@ -11,6 +11,9 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import lombok.Data;
+
+@Data
 @Entity
 public class Emergency {
 	
@@ -21,7 +24,7 @@ public class Emergency {
 	private String id;
 	
 	@ManyToOne
-	private String victim;
+	private Victim victim;
 	
 	private String ipAddress;
 	

@@ -9,7 +9,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.gonzalitos.web.app.services.UserService;
@@ -64,7 +63,7 @@ public class MainController {
 	
 	@GetMapping("/lilith")
 	public String lilith() {
-		userService.lilith();;
+		userService.lilith();
 		return "redirect:/";
 	}
 	

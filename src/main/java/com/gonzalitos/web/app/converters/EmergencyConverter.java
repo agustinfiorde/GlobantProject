@@ -3,14 +3,17 @@ package com.gonzalitos.web.app.converters;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.codehaus.jettison.json.JSONArray;
+import org.codehaus.jettison.json.JSONObject;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.gonzalitos.web.app.entities.Emergency;
+import com.gonzalitos.web.app.errors.WebException;
 import com.gonzalitos.web.app.models.EmergencyModel;
 import com.gonzalitos.web.app.repositories.EmergencyRepository;
-import com.madresdepie.web.app.entities.;
+
 
 @Component("EmergencyConverter")
 public class EmergencyConverter  extends OwnConverter<EmergencyModel, Emergency>{
@@ -50,5 +53,41 @@ public class EmergencyConverter  extends OwnConverter<EmergencyModel, Emergency>
 			model.add(entidadToModelo(a));
 		}
 		return model;
+	}
+
+	@Override
+	public Emergency modelToEntity(EmergencyModel m) throws WebException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public EmergencyModel entityToModel(Emergency e) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Emergency> modelsToEntities(List<EmergencyModel> m) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<EmergencyModel> entitiesToModels(List<Emergency> e) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public JSONObject entityTOJSON(Emergency e) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public JSONArray entitiesTOJSON(List<Emergency> e) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

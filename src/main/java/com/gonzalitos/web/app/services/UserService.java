@@ -1,11 +1,14 @@
 package com.gonzalitos.web.app.services;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -13,7 +16,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +24,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.gonzalitos.web.app.converters.UserConverter;
 import com.gonzalitos.web.app.entities.User;
-import com.gonzalitos.web.app.enums.Roles;
 import com.gonzalitos.web.app.errors.WebException;
 import com.gonzalitos.web.app.models.UserModel;
 import com.gonzalitos.web.app.repositories.UserRepository;
@@ -70,20 +71,6 @@ public class UserService implements UserDetailsService{
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		return userRepository.searchByEmail(auth.getName());
 	}
-	
-	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { WebException.class, Exception.class })
-	public void lilith() {
-		if (userRepository.searchByEmail("gonzalitos@gmail.com")==null) {
-			User user = new User();
-			user.setRole(Roles.ADMIN);
-			user.setDni("35555555");
-			user.setRegistered(new Date());
-			user.setPassword(new BCryptPasswordEncoder().encode("asdasdasd"));
-			user.setEmail("gonzalitos@gmail.com");
-			
-			userRepository.save(user);
-		}
-	}
 
 	@Override
 	public UserDetails loadUserByUsername(String email)  {
@@ -98,6 +85,31 @@ public class UserService implements UserDetailsService{
 			return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), permissions);
 		} else {
 			return null;
+		}
+	}
+	
+	public Boolean Scrap() {
+	    try {
+	        Document doc = Jsoup.connect("https://www.dateas.com/es/consulta_cuit_cuil?name=&cuit=36417168&tipo=fisicas-juridicas").get();
+//	        String name=;
+//	        String dni=;
+	        System.out.println(doc.getElementsByTag("tr").select(".odd").select("a").get(0));
+	        return true;
+	        
+	      } catch (IOException e) {
+	        e.printStackTrace();
+	        return false;
+	      }
+	}
+	
+	public void lilith() {
+		if (userRepository.searchByEmail("gonzalitos@gmail.com")==null) {
+			User user = new User();
+			user.setDni("35555555");
+			user.setEmail("gonzalitos@gmail.com");
+			user.setName("Gonzalo");
+			user.setLastName("Sarmiento");
+			userRepository.save(user);
 		}
 	}
 	
