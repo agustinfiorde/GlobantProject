@@ -1,11 +1,14 @@
 package com.gonzalitos.web.app.services;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -83,6 +86,22 @@ public class UserService implements UserDetailsService{
 		} else {
 			return null;
 		}
+	}
+	
+	public Boolean Scrap() {
+	    try {
+
+	        Document doc = Jsoup.connect("https://www.dateas.com/es/consulta_cuit_cuil?name=&cuit=36417168&tipo=fisicas-juridicas").get();
+//	        String name=;
+//	        String dni=;
+	        
+	        System.out.println(doc.getElementsByTag("tr").select(".odd").select("a").get(0));
+	        return true;
+	        
+	      } catch (IOException e) {
+	        e.printStackTrace();
+	        return false;
+	      }
 	}
 	
 }
