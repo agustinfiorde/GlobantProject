@@ -28,7 +28,7 @@ public class VictimConverter extends OwnConverter<VictimModel, Victim> {
 		try {
 			BeanUtils.copyProperties(entity, model);
 			if (entity.getAggressors() != null) {
-				model.setAggressors(aggressorConverter.entitiesToModels(entity.getAggressors()));
+				model.setAggressorsModel(aggressorConverter.entitiesToModels(entity.getAggressors()));
 			}
 		} catch (Exception e) {
 			log.error("Error al convertir la entity en el modelo del Agresor", e);
@@ -45,8 +45,8 @@ public class VictimConverter extends OwnConverter<VictimModel, Victim> {
 
 		try {
 			BeanUtils.copyProperties(model, victim);
-			if (model.getAggressors()!=null) {
-				victim.setAggressors(aggressorConverter.modelsToEntities(model.getAggressors()));
+			if (model.getAggressorsModel()!=null) {
+				victim.setAggressors(aggressorConverter.modelsToEntities(model.getAggressorsModel()));
 			}
 		} catch (Exception e) {
 			log.error("Error al convertir el modelo del Agresor en entity", e);

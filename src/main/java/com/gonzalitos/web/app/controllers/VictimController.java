@@ -1,13 +1,13 @@
 package com.gonzalitos.web.app.controllers;
 
-import static com.gonzalitos.web.app.util.Texts.ACCION_LABEL;
-import static com.gonzalitos.web.app.util.Texts.AGGRESSOR_LABEL;
-import static com.gonzalitos.web.app.util.Texts.ERROR;
-import static com.gonzalitos.web.app.util.Texts.PAGE_LABEL;
-import static com.gonzalitos.web.app.util.Texts.QUERY_LABEL;
-import static com.gonzalitos.web.app.util.Texts.SAVE_LABEL;
-import static com.gonzalitos.web.app.util.Texts.UNEXPECTED_ERROR;
-import static com.gonzalitos.web.app.util.Texts.URL_LABEL;
+import static com.gonzalitos.web.app.utils.Texts.ACCION_LABEL;
+import static com.gonzalitos.web.app.utils.Texts.AGGRESSOR_LABEL;
+import static com.gonzalitos.web.app.utils.Texts.ERROR;
+import static com.gonzalitos.web.app.utils.Texts.PAGE_LABEL;
+import static com.gonzalitos.web.app.utils.Texts.QUERY_LABEL;
+import static com.gonzalitos.web.app.utils.Texts.SAVE_LABEL;
+import static com.gonzalitos.web.app.utils.Texts.UNEXPECTED_ERROR;
+import static com.gonzalitos.web.app.utils.Texts.URL_LABEL;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;

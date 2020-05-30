@@ -26,7 +26,7 @@ public class EmergencyService {
 	private EmergencyRepository emergencyRepository;
 
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { WebException.class, Exception.class })
-	public Emergency guardar(EmergencyModel model) throws WebException {
+	public Emergency save(EmergencyModel model) throws WebException {
 		Emergency emergency = emergencyConverter.modeloToEntidad(model);
 
 		if (emergency.getRemove() != null) {
@@ -38,7 +38,7 @@ public class EmergencyService {
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { WebException.class, Exception.class })
-	public Emergency eliminar(String id) throws WebException {
+	public Emergency delete(String id) throws WebException {
 		Emergency emergency = emergencyRepository.getOne(id);
 		if (emergency.getRemove() == null) {
 			emergency.setRemove(new Date());
@@ -50,20 +50,19 @@ public class EmergencyService {
 		return emergency;
 	}
 
-	public Page<Emergency> listarActivos(Pageable paginable, String q) {
+	public Page<Emergency> toList(Pageable paginable, String q) {
 		return emergencyRepository.searchActives(paginable, "%" + q + "%");
 	}
 
-	public Page<Emergency> listarActivos(Pageable paginable) {
+	public Page<Emergency> toList(Pageable paginable) {
 		return emergencyRepository.searchActives(paginable);
 	}
 	
-	public List<Emergency> listarActivos() {
+	public List<Emergency> toList() {
 		return emergencyRepository.searchActives();
 	}
 	
-
-	public EmergencyModel buscar(String id) {
+	public EmergencyModel search(String id) {
 		Emergency emergency = emergencyRepository.getOne(id);
 		return emergencyConverter.entidadToModelo(emergency);
 	}

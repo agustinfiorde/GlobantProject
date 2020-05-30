@@ -15,7 +15,8 @@ public final class Texts {
 	public static final String ACCION_LABEL = "accion";
 	public static final String QUERY_LABEL = "q";
 	public static final String SAVE_LABEL = "save";
-
+	public static final String EMERGENCY_LABEL = "emergency-list";
+	
 	public static final String URL_LABEL = "url";
 	public static final String USER_LABEL = "user";
 

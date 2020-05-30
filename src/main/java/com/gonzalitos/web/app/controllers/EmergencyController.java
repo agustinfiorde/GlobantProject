@@ -1,5 +1,13 @@
 package com.gonzalitos.web.app.controllers;
 
+import static com.gonzalitos.web.app.utils.Texts.ACCION_LABEL;
+import static com.gonzalitos.web.app.utils.Texts.AGGRESSOR_LABEL;
+import static com.gonzalitos.web.app.utils.Texts.ERROR;
+import static com.gonzalitos.web.app.utils.Texts.PAGE_LABEL;
+import static com.gonzalitos.web.app.utils.Texts.QUERY_LABEL;
+import static com.gonzalitos.web.app.utils.Texts.SAVE_LABEL;
+import static com.gonzalitos.web.app.utils.Texts.UNEXPECTED_ERROR;
+import static com.gonzalitos.web.app.utils.Texts.URL_LABEL;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -22,9 +30,6 @@ import com.gonzalitos.web.app.entities.Emergency;
 import com.gonzalitos.web.app.errors.WebException;
 import com.gonzalitos.web.app.models.EmergencyModel;
 import com.gonzalitos.web.app.services.EmergencyService;
-import static com.gonzalitos.web.app.utils.Texts.*;
-
-
 
 @Controller
 @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -34,45 +39,43 @@ public class EmergencyController extends OwnController {
 	@Autowired
 	private EmergencyService emergencyService;
 	
-	public EmergencyController(String list, String form) {
-		super(list, form);
+	public EmergencyController() {
+		super("emergency-list", "emergency-form");
 	}
-	
-	
 
-	@PostMapping("/guardar")
-	public String guardar(HttpSession session, @Valid @ModelAttribute(EMERGENCY_LIST_LABEL) EmergencyModel emergency, BindingResult result, ModelMap modelo) {
-		log.info("METODO: financiamiento.guardar -- PARAMETROS: " + emergency);
+	@PostMapping("/save")
+	public String guardar(HttpSession session, @Valid @ModelAttribute(AGGRESSOR_LABEL) EmergencyModel m, BindingResult result, ModelMap modelo) {
+		log.info("METODO: emergency.save() -- PARAMETROS: " + m);
 		try {
 			if (result.hasErrors()) {
 				error(modelo, result);
 			} else {
-				emergencyService.guardar(emergency);
-				return "redirect:/financiamiento/listado";
+				emergencyService.save(m);
+				return "redirect:/emergency/list";
 			}
 		} catch (WebException e) {
-			modelo.addAttribute(ERROR, "Ocurrió un error al intentar modificar el financiamiento. " + e.getMessage());
+			modelo.addAttribute(ERROR, "Ocurrió un error al intentar modificar el Agresor. " + e.getMessage());
 		} catch (Exception e) {
-			modelo.addAttribute(ERROR, "Ocurrió un error inesperado al intentar modificar el financiamiento.");
+			modelo.addAttribute(ERROR, "Ocurrió un error inesperado al intentar modificar el Agresor.");
 			log.error(UNEXPECTED_ERROR, e);
 		}
 		return formView;
 	}
 
-	@PostMapping("/eliminar")
-	public String eliminar(@ModelAttribute(EMERGENCY_LABEL) EmergencyModel emergencyM, ModelMap model) {
-		log.info("METODO: emergencyM.eliminar() -- PARAMETROS: " + emergencyM);
+	@PostMapping("/delete")
+	public String eliminar(@ModelAttribute(AGGRESSOR_LABEL) EmergencyModel m, ModelMap model) {
+		log.info("METODO: emergency.delete() -- PARAMETROS: " + m);
 		model.addAttribute(ACCION_LABEL, "eliminar");
 		try {
-			emergencyService.eliminar(emergencyM.getId());
-			return "redirect:/financiamiento/listado";
+			emergencyService.delete(m.getId());
+			return "redirect:/emergency/list";
 		} catch (Exception e) {
-			model.addAttribute(ERROR, "Ocurrió un error inesperado al intentar eliminar el financiamiento.");
+			model.addAttribute(ERROR, "Ocurrió un error inesperado al intentar eliminar el Agresor.");
 			return formView;
 		}
 	}
 
-	@GetMapping("/formulario")
+	@GetMapping("/form")
 	public ModelAndView formulario(@RequestParam(required = false) String id, @RequestParam(required = false) String accion) {
 		ModelAndView model = new ModelAndView(formView);
 		EmergencyModel emergency = new EmergencyModel();
@@ -81,31 +84,31 @@ public class EmergencyController extends OwnController {
 		}
 
 		if (id != null) {
-			emergency = emergencyService.buscar(id);
+			emergency = emergencyService.search(id);
 		}
 
-		model.addObject(EMERGENCY_LABEL, emergency);
+		model.addObject(AGGRESSOR_LABEL, emergency);
 		model.addObject(ACCION_LABEL, accion);
 		return model;
 	}
 
-	@GetMapping("/listado")
+	@GetMapping("/list")
 	public ModelAndView listar(HttpSession session, Pageable paginable, @RequestParam(required = false) String q) {
 		ModelAndView modelo = new ModelAndView(listView);
 
 		Page<Emergency> page = null;
 		if (q == null || q.isEmpty()) {
-			page = emergencyService.listarActivos(paginable);
+			page = emergencyService.toList(paginable);
 		} else {
-			page = emergencyService.listarActivos(paginable, q);
+			page = emergencyService.toList(paginable, q);
 			modelo.addObject(QUERY_LABEL, q);
 		}
 		modelo.addObject(PAGE_LABEL, page);
 
-		log.info("METODO: financiamiento.listar() -- PARAMETROS: " + paginable);
+		log.info("METODO: emergency.toList() -- PARAMETROS: " + paginable);
 
-		modelo.addObject(URL_LABEL, "/emergency/listado");
-		modelo.addObject(EMERGENCY_LABEL, new EmergencyModel());
+		modelo.addObject(URL_LABEL, "/emergency/list");
+		modelo.addObject(AGGRESSOR_LABEL, new EmergencyModel());
 		return modelo;
 	}
 
