@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import static com.gonzalitos.web.app.utils.Texts.*;
+
 import com.gonzalitos.web.app.errors.WebException;
 import com.gonzalitos.web.app.models.HelpRequestModel;
 import com.gonzalitos.web.app.services.HelpRequestService;

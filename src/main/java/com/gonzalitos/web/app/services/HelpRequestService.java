@@ -1,11 +1,8 @@
 package com.gonzalitos.web.app.services;
 
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,6 +41,11 @@ public class HelpRequestService {
 			throw new WebException("El agresor que intenta eliminar ya se encuentra dado de baja.");
 		}
 		return financiamiento;
+	}
+	
+	public HelpRequestModel search(String id) {
+		HelpRequest helpRequest = helpRequestRepository.getOne(id);
+		return helpRequestConverter.entityToModel(helpRequest);
 	}
 		
 }

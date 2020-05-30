@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import com.gonzalitos.web.app.entities.HelpRequest;
 import com.gonzalitos.web.app.models.HelpRequestModel;
+import com.gonzalitos.web.app.repositories.HelpRequestRepository;
 
 @Component
 public class HelpRequestConverter extends OwnConverter<HelpRequestModel, HelpRequest>{
