@@ -1,5 +1,11 @@
 package com.gonzalitos.web.app.controllers;
 
+import static com.gonzalitos.web.app.utils.Texts.ACCION_LABEL;
+import static com.gonzalitos.web.app.utils.Texts.AGGRESSOR_LABEL;
+import static com.gonzalitos.web.app.utils.Texts.ERROR;
+import static com.gonzalitos.web.app.utils.Texts.SAVE_LABEL;
+import static com.gonzalitos.web.app.utils.Texts.UNEXPECTED_ERROR;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -17,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.gonzalitos.web.app.errors.WebException;
 import com.gonzalitos.web.app.models.AggressionTypeModel;
+import com.gonzalitos.web.app.services.AggressionTypeService;
 
 @Controller
 @PreAuthorize("hasRole('ROLE_ADMIN')")

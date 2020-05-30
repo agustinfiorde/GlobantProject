@@ -6,7 +6,6 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 
 import com.gonzalitos.web.app.converters.AggressorConverter;
 import com.gonzalitos.web.app.entities.Aggressor;
@@ -23,7 +22,7 @@ public class AggressorService {
 	@Autowired
 	private AggressorRepository aggressorRepository;
 
-	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { WebException.class, Exception.class })
+	@Transactional
 	public Aggressor save(AggressorModel model) throws WebException {
 		Aggressor aggressor = aggressorConverter.modelToEntity(model);
 		if (aggressor.getRemove() != null) {
@@ -35,7 +34,7 @@ public class AggressorService {
 		return aggressorRepository.save(aggressor);
 	}
 
-	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { WebException.class, Exception.class })
+	@Transactional
 	public Aggressor delete(String id) throws WebException {
 		Aggressor financiamiento = aggressorRepository.getOne(id);
 		if (financiamiento.getRemove() == null) {

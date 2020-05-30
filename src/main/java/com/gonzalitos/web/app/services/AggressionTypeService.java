@@ -9,7 +9,6 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 
 import com.gonzalitos.web.app.converters.AggressionTypeConverter;
 import com.gonzalitos.web.app.entities.AggressionType;
@@ -26,7 +25,7 @@ public class AggressionTypeService {
 	@Autowired
 	private AggressionTypeRepository aggressionTypeRepository;
 
-	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { WebException.class, Exception.class })
+	@Transactional
 	public AggressionType save(AggressionTypeModel model) throws WebException {
 		AggressionType aggressionType = aggressionTypeConverter.modelToEntity(model);
 		if (aggressionType.getRemove() != null) {
@@ -38,7 +37,7 @@ public class AggressionTypeService {
 		return aggressionTypeRepository.save(aggressionType);
 	}
 
-	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { WebException.class, Exception.class })
+	@Transactional
 	public AggressionType delete(String id) throws WebException {
 		AggressionType financiamiento = aggressionTypeRepository.getOne(id);
 		if (financiamiento.getRemove() == null) {
