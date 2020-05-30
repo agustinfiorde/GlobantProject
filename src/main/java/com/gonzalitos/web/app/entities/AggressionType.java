@@ -28,5 +28,9 @@ public class AggressionType implements Serializable{
 	private String description;
 	
 	@Temporal(TemporalType.TIMESTAMP)
+	private Date registered;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date edited;
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date remove;
 }
