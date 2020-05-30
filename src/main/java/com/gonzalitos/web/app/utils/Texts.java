@@ -20,6 +20,9 @@ public final class Texts {
 	public static final String USER_LABEL = "user";
 
 	public static final String SEARCH_LABEL = "search";
+	
+	public static final String EMERGENCY_LIST_LABEL = "emergency-list";
+	public static final String EMERGENCY_FORM_LABEL = "emergency-form";
 
 
 }
