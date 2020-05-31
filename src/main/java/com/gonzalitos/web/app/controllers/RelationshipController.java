@@ -5,6 +5,7 @@ import static com.gonzalitos.web.app.utils.Texts.AGGRESSOR_LABEL;
 import static com.gonzalitos.web.app.utils.Texts.ERROR;
 import static com.gonzalitos.web.app.utils.Texts.PAGE_LABEL;
 import static com.gonzalitos.web.app.utils.Texts.QUERY_LABEL;
+import static com.gonzalitos.web.app.utils.Texts.RELATIONSHIP_LABEL;
 import static com.gonzalitos.web.app.utils.Texts.SAVE_LABEL;
 import static com.gonzalitos.web.app.utils.Texts.UNEXPECTED_ERROR;
 import static com.gonzalitos.web.app.utils.Texts.URL_LABEL;
@@ -52,7 +53,7 @@ public class RelationshipController extends OwnController{
 				error(modelo, result);
 			} else {
 				relationshipService.save(m);
-				return "redirect:/helprequest/list";
+				return "redirect:/relationship/list";
 			}
 		} catch (WebException e) {
 			modelo.addAttribute(ERROR, "Ocurrió un error al intentar modificar el relationship. " + e.getMessage());
@@ -93,14 +94,14 @@ public class RelationshipController extends OwnController{
 		log.info("METODO: relationship.toList() -- PARAMETROS: " + paginable);
 
 		modelo.addObject(URL_LABEL, "/helprequest/list");
-		modelo.addObject(AGGRESSOR_LABEL, new HelpRequestModel());
+		modelo.addObject(RELATIONSHIP_LABEL, new HelpRequestModel());
 		return modelo;
 	}
 	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/form")
 	public ModelAndView form(@RequestParam(required = false) String id, @RequestParam(required = false) String accion) {
-		ModelAndView model = new ModelAndView("frontend/emergencyrequest-form");
+		ModelAndView model = new ModelAndView(formView);
 		RelationshipModel relationship = new RelationshipModel();
 		if (accion == null || accion.isEmpty()) {
 			accion = SAVE_LABEL;
@@ -110,7 +111,7 @@ public class RelationshipController extends OwnController{
 			relationship = relationshipService.search(id);
 		}
 
-		model.addObject(AGGRESSOR_LABEL, relationship);
+		model.addObject(RELATIONSHIP_LABEL, relationship);
 		model.addObject(ACCION_LABEL, accion);
 		return model;
 	}
