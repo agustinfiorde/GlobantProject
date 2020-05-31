@@ -30,8 +30,7 @@ public class Victim implements Serializable{
 	private String lastName;
 	private String dni;
 	
-	@Temporal(TemporalType.DATE)
-	private Date dateBorn; //change Date to String in victimModel
+	private String dateBornString; //change Date to String in victimModel
 	private String phone;
 	private String email;
 	private Integer children;
@@ -41,14 +40,11 @@ public class Victim implements Serializable{
 //	@ManyToMany
 //	private List<Aggressor> aggressors; //change List<Aggressor> to List<AggressorModel> in victimModel
 	
-	@Temporal(TemporalType.TIMESTAMP) //change Date to String in victimModel
-	private Date remove; 
+	private String removeString; 
 	
-	@Temporal(TemporalType.TIMESTAMP) //change Date to String in victimModel
-	private Date membership; 
+	private String membershipString; 
 	
-	@Temporal(TemporalType.TIMESTAMP) //change Date to String in victimModel
-	private Date modification;
+	private String modificationString;
 	
 
 }

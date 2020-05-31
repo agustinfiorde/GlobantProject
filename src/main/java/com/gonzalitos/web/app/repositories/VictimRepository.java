@@ -15,22 +15,27 @@ import com.gonzalitos.web.app.entities.Victim;
 @Repository
 public interface VictimRepository extends JpaRepository<Victim, String>, PagingAndSortingRepository<Victim, String>  {
 
-	@Query("SELECT a from Victim a WHERE a.remove IS NOT NULL")
+	@Query("SELECT a from Victim a WHERE a.removeString IS NOT NULL")
 	public Page<Victim> searchRemoved(Pageable pageable);
 
 	@Query("SELECT a from Victim a")
 	public Page<Victim> searchAll(Pageable pageable);
 
-	@Query("SELECT a from Victim a WHERE a.remove IS NULL AND a.name LIKE :name")
+	@Query("SELECT a FROM Victim a WHERE a.removeString IS NULL AND a.dni = :dni")
+	public Victim searchByDni(@Param("dni") String dni);
+	
+	@Query("SELECT a from Victim a WHERE a.removeString IS NULL AND a.name LIKE :name")
 	public Page<Victim> searchActivesByName(Pageable pageable, @Param("name") String name);
 	
-	@Query("SELECT a from Victim a WHERE a.remove IS NULL")
+	@Query("SELECT a from Victim a WHERE a.removeString IS NULL")
 	public Page<Victim> searchActives(Pageable pageable);
 
-	@Query("SELECT a from Victim a WHERE a.remove IS NULL ORDER BY a.name")
+	@Query("SELECT a from Victim a WHERE a.removeString IS NULL ORDER BY a.name")
 	public List<Victim> searchActives();
 	
-	@Query("SELECT a from Victim a WHERE a.remove IS NULL AND a.dni LIKE :dni")
+	@Query("SELECT a from Victim a WHERE a.removeString IS NULL AND a.dni LIKE :dni")
 	public Page<Victim> searchActives(Pageable pageable, @Param("dni") String dni);
+	
+	Victim findByDni(String dni);
 	
 }

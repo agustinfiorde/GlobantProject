@@ -1,13 +1,11 @@
 function sendHelpRequest(){
 	
-	var helpRequest = {
-			address: $("#name").val(),
+	var helpRequestModel = {
+			address: $("#address").val(),
 			factTimeString:  new Date(),
 			typesOfViolences: $("#aggressionTypes").val(),
 			relationship: $("#relationShip").val(),
-			description: $("#description").val()
-	}
-	var victim = {
+			description: $("#description").val(),
 			name: $("#name").val(),
 			lastName: $("#lastname").val(),
 			dateBornString: $("#dateBorn").val(),
@@ -15,30 +13,21 @@ function sendHelpRequest(){
 		 	phone: $("#phone").val(),
 			email: $("#email").val(),
 			children: $("#children").val(),
-			whistleblower: $("#whistleblower").val(),
-			ipAddress: null
+			whistleblower: true,
+			ipAddress: null,
+			nameAggressor: $("#nameAggressor").val(),
+			secondNameAggressor: $("#middleNameAggressor").val(),
+			lastNameAggressor: $("#lastNameAggressor").val(),
+			dniAggressor: $("#dniAggressor").val()
 	}
-	var aggressor = {
-			name: $("#nameAggressor").val(),
-			secondName: $("#middleNameAggressor").val(),
-			lastName: $("#lastNameAggressor").val(),
-			dni: $("#dniAggressor").val()
-	}
-	
-	console.log(helpRequest);
-	console.log(victim);
-	console.log(aggressor);
+	console.log(helpRequestModel);
 	
 	$.ajax({
 		url: '/api/helprequest/save',
-		beforeSend : function(request) { 
-			request.setRequestHeader("helpRequest", helpRequest); 
-			request.setRequestHeader("victim", victim); 
-			request.setRequestHeader("aggressor", aggressor);
-		}, 
 		dataType : 'json', 
 		contentType : 'application/json', 
-		type : 'POST', 
+		type : 'POST',
+		data : JSON.stringify(helpRequestModel),
 		success : function(data) { 
 			console.log(data);
 		},
@@ -51,37 +40,43 @@ function sendHelpRequest(){
 
 function buildSelects(){
 	$.ajax({
-		url: '/api/helprequest/serchrelationship',
+		url: '/api/helprequest/searchaggressiontypes',
 		dataType : 'json', 
 		contentType : 'application/json', 
 		type : 'GET', 
 		success : function(data) { 
-			var select1 = '<select class="form-control my-lg-3" id="relationShip">'
-						+ '<option disabled="disabled" selected="selected" hidden="">Seleccione un tipo de relacíon</option>';
+			console.log(data);
+			$("#select1").empty();
 			if (data != null) {
-				for (var i = 0; i < data.length; i++) {
-					select1 += '<opction value="' + data[i].id + '">' + data[i].name + '</option>'
-				}
+				var select1 =  '<label style="margin-top: 10px;">Tipo de maltrato</label>'
+							+ '<select class="form-control" id="aggressionTypes" multiple>'
+							+ '<option disabled="disabled" selected="selected" hidden="">Seleccione un tipo de agresíon</option>';
+					for (var i = 0; i < data.length; i++) {
+						select1 += '<option value="' + data[i].id + '">' + data[i].name + '</option>';
+					}
+				select1 += '</select>';
+				$("#select1").append(select1);
 			}
-			select1 += '</select>';
-			$("#select1").append(select1);
 		} 
 	});
 	$.ajax({
-		url: '/serchaggressionTypes',
+		url: '/api/helprequest/searchrelationship',
 		dataType : 'json', 
 		contentType : 'application/json', 
 		type : 'GET', 
 		success : function(data) { 
-			var select2 = '<select class="selectpicker my-lg-3" id="aggressionTypes" multiple>'
-						+ '<option disabled="disabled" selected="selected" hidden="">Seleccione un tipo de agresíon</option>';
+			console.log(data);
+			$("#select2").empty();
 			if (data != null) {
+				var select2 = '<label style="margin-top: 10px;">Tipo de relacion</label>'
+							+ '<select class="form-control" id="relationShip">'
+							+ '<option disabled="disabled" selected="selected" hidden="">Seleccione un tipo de relacíon</option>';
 				for (var i = 0; i < data.length; i++) {
-					select2 += '<opction value="' + data[i].id + '">' + data[i].name + '</option>';
+					select2 += '<option value="' + data[i].id + '">' + data[i].name + '</option>';
 				}
+				select2 += '</select>';
+				$("#select2").append(select2);
 			}
-			select2 += '</select>';
-			$("#select2").append(select1);
 		} 
 	});
 }
