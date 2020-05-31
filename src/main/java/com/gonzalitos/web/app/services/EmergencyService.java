@@ -26,14 +26,19 @@ public class EmergencyService {
 	private EmergencyRepository emergencyRepository;
 
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { WebException.class, Exception.class })
-	public Emergency save(EmergencyModel model) throws WebException {
+	public Emergency save(EmergencyModel model, String ipAddress) throws WebException {
+		
 		Emergency emergency = emergencyConverter.modeloToEntidad(model);
+		
+		emergency.getVictim().setIpAddress(ipAddress);
 
 		if (emergency.getRemove() != null) {
 			throw new WebException("La EMERGENCIA que intenta modificar se encuentra dada de baja.");
 		}
-
-
+		if (emergency.getRegistered() == null) {
+			emergency.setRegistered(new Date());
+		}
+		//enviar mail
 		return emergencyRepository.save(emergency);
 	}
 

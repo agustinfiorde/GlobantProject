@@ -6,18 +6,15 @@ import static com.gonzalitos.web.app.utils.Texts.ERROR;
 import static com.gonzalitos.web.app.utils.Texts.PAGE_LABEL;
 import static com.gonzalitos.web.app.utils.Texts.QUERY_LABEL;
 import static com.gonzalitos.web.app.utils.Texts.SAVE_LABEL;
-import static com.gonzalitos.web.app.utils.Texts.UNEXPECTED_ERROR;
 import static com.gonzalitos.web.app.utils.Texts.URL_LABEL;
 
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gonzalitos.web.app.entities.Emergency;
-import com.gonzalitos.web.app.errors.WebException;
 import com.gonzalitos.web.app.models.EmergencyModel;
 import com.gonzalitos.web.app.services.EmergencyService;
 
@@ -41,24 +37,24 @@ public class EmergencyController extends OwnController {
 		super("emergency-list", "emergency-form");
 	}
 
-	@PostMapping("/save")
-	public String guardar(HttpSession session, @Valid @ModelAttribute(AGGRESSOR_LABEL) EmergencyModel m, BindingResult result, ModelMap modelo) {
-		log.info("METODO: emergency.save() -- PARAMETROS: " + m);
-		try {
-			if (result.hasErrors()) {
-				error(modelo, result);
-			} else {
-				emergencyService.save(m);
-				return "redirect:/emergency/list";
-			}
-		} catch (WebException e) {
-			modelo.addAttribute(ERROR, "Ocurrió un error al intentar modificar el Agresor. " + e.getMessage());
-		} catch (Exception e) {
-			modelo.addAttribute(ERROR, "Ocurrió un error inesperado al intentar modificar el Agresor.");
-			log.error(UNEXPECTED_ERROR, e);
-		}
-		return formView;
-	}
+//	@PostMapping("/save")
+//	public String guardar(HttpSession session, @Valid @ModelAttribute(AGGRESSOR_LABEL) EmergencyModel m, BindingResult result, ModelMap modelo) {
+//		log.info("METODO: emergency.save() -- PARAMETROS: " + m);
+//		try {
+//			if (result.hasErrors()) {
+//				error(modelo, result);
+//			} else {
+//				emergencyService.save(m);
+//				return "redirect:/emergency/list";
+//			}
+//		} catch (WebException e) {
+//			modelo.addAttribute(ERROR, "Ocurrió un error al intentar modificar el Agresor. " + e.getMessage());
+//		} catch (Exception e) {
+//			modelo.addAttribute(ERROR, "Ocurrió un error inesperado al intentar modificar el Agresor.");
+//			log.error(UNEXPECTED_ERROR, e);
+//		}
+//		return formView;
+//	}
 
 	@PostMapping("/delete")
 	public String eliminar(@ModelAttribute(AGGRESSOR_LABEL) EmergencyModel m, ModelMap model) {
