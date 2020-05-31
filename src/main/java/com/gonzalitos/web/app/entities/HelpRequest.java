@@ -37,14 +37,14 @@ public class HelpRequest implements Serializable{
 	@ManyToMany
 	private List<AggressionType> typesOfViolences;
 	
-//	@OneToOne
-//	private Victim victim;
+	@ManyToOne
+	private Victim victim;
 	
 	@ManyToOne
 	private Aggressor aggressor;
 	
-//	@ManyToOne
-//	private Relationship relationship;
+	@ManyToOne
+	private Relationship relationship;
 	
 	@Lob
 	@Column(name = "description", length = 4000)

@@ -32,7 +32,6 @@ import com.gonzalitos.web.app.models.AggressorModel;
 import com.gonzalitos.web.app.services.AggressorService;
 
 @Controller
-@PreAuthorize("hasRole('ROLE_ADMIN')")
 @RequestMapping("/aggressor")
 public class AggressorController extends OwnController {
 	
@@ -43,6 +42,7 @@ public class AggressorController extends OwnController {
 		super("aggressor-list", "aggressor-form");
 	}
 
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/save")
 	public String save(HttpSession session, @Valid @ModelAttribute(AGGRESSOR_LABEL) AggressorModel m, BindingResult result, ModelMap modelo) {
 		log.info("METODO: aggressor.save() -- PARAMETROS: " + m);
@@ -62,10 +62,11 @@ public class AggressorController extends OwnController {
 		return formView;
 	}
 
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/delete")
 	public String delete(@ModelAttribute(AGGRESSOR_LABEL) AggressorModel m, ModelMap model) {
 		log.info("METODO: aggressor.delete() -- PARAMETROS: " + m);
-		model.addAttribute(ACCION_LABEL, "eliminar");
+		model.addAttribute(ACCION_LABEL, "delete");
 		try {
 			aggressorService.delete(m.getId());
 			return "redirect:/aggressor/list";
@@ -75,6 +76,7 @@ public class AggressorController extends OwnController {
 		}
 	}
 
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/form")
 	public ModelAndView form(@RequestParam(required = false) String id, @RequestParam(required = false) String accion) {
 		ModelAndView model = new ModelAndView(formView);
@@ -92,9 +94,9 @@ public class AggressorController extends OwnController {
 		return model;
 	}
 	
-
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/list")
-	public ModelAndView listar(HttpSession session, Pageable paginable, @RequestParam(required = false) String q) {
+	public ModelAndView list(HttpSession session, Pageable paginable, @RequestParam(required = false) String q) {
 		ModelAndView modelo = new ModelAndView(listView);
 
 		Page<Aggressor> page = null;

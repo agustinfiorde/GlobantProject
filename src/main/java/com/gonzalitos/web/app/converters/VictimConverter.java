@@ -20,16 +20,16 @@ public class VictimConverter extends OwnConverter<VictimModel, Victim> {
 	@Autowired
 	private VictimRepository victimRepository;
 
-	@Autowired
-	private AggressorConverter aggressorConverter;
+//	@Autowired
+//	private AggressorConverter aggressorConverter;
 
 	public VictimModel entityToModel(Victim entity) {
 		VictimModel model = new VictimModel();
 		try {
 			BeanUtils.copyProperties(entity, model);
-			if (entity.getAggressors() != null) {
-				model.setAggressorsModel(aggressorConverter.entitiesToModels(entity.getAggressors()));
-			}
+//			if (entity.getAggressors() != null) {
+//				model.setAggressorsModel(aggressorConverter.entitiesToModels(entity.getAggressors()));
+//			}
 		} catch (Exception e) {
 			log.error("Error al convertir la entity en el modelo del Agresor", e);
 		}
@@ -45,9 +45,9 @@ public class VictimConverter extends OwnConverter<VictimModel, Victim> {
 
 		try {
 			BeanUtils.copyProperties(model, victim);
-			if (model.getAggressorsModel()!=null) {
-				victim.setAggressors(aggressorConverter.modelsToEntities(model.getAggressorsModel()));
-			}
+//			if (model.getAggressorsModel()!=null) {
+//				victim.setAggressors(aggressorConverter.modelsToEntities(model.getAggressorsModel()));
+//			}
 		} catch (Exception e) {
 			log.error("Error al convertir el modelo del Agresor en entity", e);
 		}
@@ -95,7 +95,7 @@ public class VictimConverter extends OwnConverter<VictimModel, Victim> {
 			object.put("children", victim.getChildren());
 			object.put("whistleblower", victim.getWhistleblower());
 			object.put("ipAddress", victim.getIpAddress());
-			object.put("aggressors", aggressorConverter.entitiesTOJSON(victim.getAggressors()));
+//			object.put("aggressors", aggressorConverter.entitiesTOJSON(victim.getAggressors()));
 			return object;
 		} catch (JSONException e) {
 			e.printStackTrace();

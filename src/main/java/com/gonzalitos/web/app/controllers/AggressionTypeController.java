@@ -1,12 +1,12 @@
 package com.gonzalitos.web.app.controllers;
 
 import static com.gonzalitos.web.app.utils.Texts.ACCION_LABEL;
-import static com.gonzalitos.web.app.utils.Texts.AGGRESSOR_LABEL;
+import static com.gonzalitos.web.app.utils.Texts.AGGRESSION_TYPE_LABEL;
 import static com.gonzalitos.web.app.utils.Texts.ERROR;
+import static com.gonzalitos.web.app.utils.Texts.PAGE_LABEL;
+import static com.gonzalitos.web.app.utils.Texts.QUERY_LABEL;
 import static com.gonzalitos.web.app.utils.Texts.SAVE_LABEL;
 import static com.gonzalitos.web.app.utils.Texts.UNEXPECTED_ERROR;
-import static com.gonzalitos.web.app.utils.Texts.QUERY_LABEL;
-import static com.gonzalitos.web.app.utils.Texts.PAGE_LABEL;
 import static com.gonzalitos.web.app.utils.Texts.URL_LABEL;
 
 import javax.servlet.http.HttpSession;
@@ -32,7 +32,6 @@ import com.gonzalitos.web.app.models.AggressionTypeModel;
 import com.gonzalitos.web.app.services.AggressionTypeService;
 
 @Controller
-@PreAuthorize("hasRole('ROLE_ADMIN')")
 @RequestMapping("/aggressiontype")
 public class AggressionTypeController extends OwnController {
 	
@@ -43,8 +42,12 @@ public class AggressionTypeController extends OwnController {
 		super("aggressiontype-list", "aggressiontype-form");
 	}
 
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/save")
-	public String guardar(HttpSession session, @Valid @ModelAttribute(AGGRESSOR_LABEL) AggressionTypeModel m, BindingResult result, ModelMap modelo) {
+	public String save(HttpSession session, 
+			@Valid @ModelAttribute(AGGRESSION_TYPE_LABEL) AggressionTypeModel m, 
+			BindingResult result, 
+			ModelMap modelo) {
 		log.info("METODO: aggressionType.save() -- PARAMETROS: " + m);
 		try {
 			if (result.hasErrors()) {
@@ -62,10 +65,11 @@ public class AggressionTypeController extends OwnController {
 		return formView;
 	}
 
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/delete")
-	public String eliminar(@ModelAttribute(AGGRESSOR_LABEL) AggressionTypeModel m, ModelMap model) {
+	public String delete(@ModelAttribute(AGGRESSION_TYPE_LABEL) AggressionTypeModel m, ModelMap model) {
 		log.info("METODO: aggressionType.delete() -- PARAMETROS: " + m);
-		model.addAttribute(ACCION_LABEL, "eliminar");
+		model.addAttribute(ACCION_LABEL, "delete");
 		try {
 			aggressiontypeService.delete(m.getId());
 			return "redirect:/aggressiontype/list";
@@ -75,8 +79,9 @@ public class AggressionTypeController extends OwnController {
 		}
 	}
 
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/form")
-	public ModelAndView formulario(@RequestParam(required = false) String id, @RequestParam(required = false) String accion) {
+	public ModelAndView form(@RequestParam(required = false) String id, @RequestParam(required = false) String accion) {
 		ModelAndView model = new ModelAndView(formView);
 		AggressionTypeModel aggressiontype = new AggressionTypeModel();
 		if (accion == null || accion.isEmpty()) {
@@ -87,12 +92,12 @@ public class AggressionTypeController extends OwnController {
 			aggressiontype = aggressiontypeService.search(id);
 		}
 
-		model.addObject(AGGRESSOR_LABEL, aggressiontype);
+		model.addObject(AGGRESSION_TYPE_LABEL, aggressiontype);
 		model.addObject(ACCION_LABEL, accion);
 		return model;
 	}
 
-
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/list")
 	public ModelAndView listar(HttpSession session, Pageable paginable, @RequestParam(required = false) String q) {
 		ModelAndView modelo = new ModelAndView(listView);
@@ -109,7 +114,7 @@ public class AggressionTypeController extends OwnController {
 		log.info("METODO: aggressionType.toList() -- PARAMETROS: " + paginable);
 
 		modelo.addObject(URL_LABEL, "/aggressiontype/list");
-		modelo.addObject(AGGRESSOR_LABEL, new AggressionTypeModel());
+		modelo.addObject(AGGRESSION_TYPE_LABEL, new AggressionTypeModel());
 		return modelo;
 	}
 

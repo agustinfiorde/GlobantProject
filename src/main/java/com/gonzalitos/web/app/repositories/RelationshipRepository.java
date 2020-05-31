@@ -30,5 +30,8 @@ public interface RelationshipRepository extends JpaRepository<Relationship, Stri
 	@Query("SELECT a from Relationship a WHERE a.remove IS NULL ORDER BY a.name")
 	public List<Relationship> searchActives();
 	
+	@Query("SELECT a from Relationship a WHERE a.remove IS NULL AND a.name LIKE :name")
+	public Page<Relationship> searchActives(Pageable pageable, @Param("name") String name);
+	
 }
 

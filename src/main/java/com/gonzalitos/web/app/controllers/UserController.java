@@ -27,7 +27,6 @@ import com.gonzalitos.web.app.services.UserService;
 
 
 @Controller
-@PreAuthorize("hasRole('ROLE_ADMIN')")
 @RequestMapping("/user")
 public class UserController extends OwnController {
 	
@@ -38,6 +37,7 @@ public class UserController extends OwnController {
 		super("user-list", "user-form");
 	}
 
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/save")
 	public String save(HttpSession session, @Valid @ModelAttribute(USER_LABEL) UserModel m, BindingResult result, ModelMap modelo) {
 		log.info("METODO: user.save() -- PARAMETROS: " + m);
@@ -57,6 +57,7 @@ public class UserController extends OwnController {
 		return formView;
 	}
 
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/delete")
 	public String delete(@ModelAttribute(USER_LABEL) UserModel m, ModelMap model) {
 		log.info("METODO: user.delete() -- PARAMETROS: " + m);
@@ -70,6 +71,7 @@ public class UserController extends OwnController {
 		}
 	}
 
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/form")
 	public ModelAndView form(@RequestParam(required = false) String id, @RequestParam(required = false) String accion) {
 		ModelAndView model = new ModelAndView(formView);
@@ -85,6 +87,11 @@ public class UserController extends OwnController {
 		model.addObject(ACCION_LABEL, accion);
 		return model;
 	}
-
+	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@GetMapping("/logout")
+	public String logout() {
+		return "buscador.html";
+	}
 
 }

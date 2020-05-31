@@ -1,7 +1,5 @@
 package com.gonzalitos.web.app.models;
 
-import java.util.Date;
-
 import lombok.Data;
 
 @Data
@@ -14,10 +12,10 @@ public class AggressionTypeModel {
 	
 	private String description;
 	
-	private Date registered;
+	private String registeredString;
 	
-	private Date edited;
+	private String editedString;
 	
-	private Date remove;
+	private String removeString;
 	
 }

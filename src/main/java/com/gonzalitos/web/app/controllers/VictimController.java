@@ -8,6 +8,7 @@ import static com.gonzalitos.web.app.utils.Texts.QUERY_LABEL;
 import static com.gonzalitos.web.app.utils.Texts.SAVE_LABEL;
 import static com.gonzalitos.web.app.utils.Texts.UNEXPECTED_ERROR;
 import static com.gonzalitos.web.app.utils.Texts.URL_LABEL;
+import static com.gonzalitos.web.app.utils.Texts.VICTIM_LABEL;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -32,7 +33,6 @@ import com.gonzalitos.web.app.models.VictimModel;
 import com.gonzalitos.web.app.services.VictimService;
 
 @Controller
-@PreAuthorize("hasRole('ROLE_ADMIN')")
 @RequestMapping("/victim")
 public class VictimController extends OwnController {
 	
@@ -43,6 +43,7 @@ public class VictimController extends OwnController {
 		super("victim-list", "victim-form");
 	}
 
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/save")
 	public String guardar(HttpSession session, @Valid @ModelAttribute(AGGRESSOR_LABEL) VictimModel m, BindingResult result, ModelMap modelo) {
 		log.info("METODO: victim.save() -- PARAMETROS: " + m);
@@ -62,8 +63,9 @@ public class VictimController extends OwnController {
 		return formView;
 	}
 
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/delete")
-	public String eliminar(@ModelAttribute(AGGRESSOR_LABEL) VictimModel m, ModelMap model) {
+	public String delete(@ModelAttribute(AGGRESSOR_LABEL) VictimModel m, ModelMap model) {
 		log.info("METODO: victim.delete() -- PARAMETROS: " + m);
 		model.addAttribute(ACCION_LABEL, "eliminar");
 		try {
@@ -75,8 +77,9 @@ public class VictimController extends OwnController {
 		}
 	}
 
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/form")
-	public ModelAndView formulario(@RequestParam(required = false) String id, @RequestParam(required = false) String accion) {
+	public ModelAndView form(@RequestParam(required = false) String id, @RequestParam(required = false) String accion) {
 		ModelAndView model = new ModelAndView(formView);
 		VictimModel victim = new VictimModel();
 		if (accion == null || accion.isEmpty()) {
@@ -92,8 +95,9 @@ public class VictimController extends OwnController {
 		return model;
 	}
 
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/list")
-	public ModelAndView listar(HttpSession session, Pageable paginable, @RequestParam(required = false) String q) {
+	public ModelAndView list(HttpSession session, Pageable paginable, @RequestParam(required = false) String q) {
 		ModelAndView modelo = new ModelAndView(listView);
 
 		Page<Victim> page = null;
@@ -108,7 +112,7 @@ public class VictimController extends OwnController {
 		log.info("METODO: victim.toList() -- PARAMETROS: " + paginable);
 
 		modelo.addObject(URL_LABEL, "/victim/list");
-		modelo.addObject(AGGRESSOR_LABEL, new VictimModel());
+		modelo.addObject(VICTIM_LABEL, new VictimModel());
 		return modelo;
 	}
 
