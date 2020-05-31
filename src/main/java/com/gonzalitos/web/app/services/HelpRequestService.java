@@ -10,7 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.gonzalitos.web.app.converters.HelpRequestConverter;
 import com.gonzalitos.web.app.entities.HelpRequest;
 import com.gonzalitos.web.app.errors.WebException;
+import com.gonzalitos.web.app.models.AggressorModel;
 import com.gonzalitos.web.app.models.HelpRequestModel;
+import com.gonzalitos.web.app.models.VictimModel;
 import com.gonzalitos.web.app.repositories.HelpRequestRepository;
 
 @Service
@@ -21,7 +23,21 @@ public class HelpRequestService {
 
 	@Autowired
 	private HelpRequestRepository helpRequestRepository;
-
+	
+	public HelpRequestModel save(HelpRequestModel helpRequestModel, VictimModel victimModel, AggressorModel aggressorModel) throws WebException {
+		 HelpRequestModel requestModel = new HelpRequestModel();
+		 
+		 requestModel.setAddress(helpRequestModel.getAddress());
+		 requestModel.setAggressor(helpRequestModel.getAggressor());
+		 requestModel.setDescription(helpRequestModel.getDescription());
+		 requestModel.setFactTimeString(helpRequestModel.getFactTimeString());
+		 requestModel.setVictim(victimModel);
+		 requestModel.setRelationship(helpRequestModel.getRelationship());
+		 requestModel.setTypesOfViolences(helpRequestModel.getTypesOfViolences());
+		 
+		 return helpRequestConverter.entityToModel(save(requestModel));
+	}
+	
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { WebException.class, Exception.class })
 	public HelpRequest save(HelpRequestModel model) throws WebException {
 		HelpRequest helpRequest = helpRequestConverter.modelToEntity(model);

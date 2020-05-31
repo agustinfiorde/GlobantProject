@@ -1,6 +1,7 @@
 package com.gonzalitos.web.app.services;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,6 +51,10 @@ public class RelationshipService {
 	public RelationshipModel search(String id) {
 		Relationship relationship = relationshipRepository.getOne(id);
 		return relationshipConverter.entityToModel(relationship);
+	}
+	
+	public List<RelationshipModel> toListModel(){
+		return relationshipConverter.entitiesToModels(relationshipRepository.searchActives());
 	}
 	
 		

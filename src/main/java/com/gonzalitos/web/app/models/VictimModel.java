@@ -21,7 +21,7 @@ public class VictimModel {
 	private Boolean whistleblower;
 	private String ipAddress;
 	
-	private List<AggressorModel> aggressorsModel = new ArrayList<>();
+//	private List<AggressorModel> aggressorsModel = new ArrayList<>();
 
 	private String removeString;
 	

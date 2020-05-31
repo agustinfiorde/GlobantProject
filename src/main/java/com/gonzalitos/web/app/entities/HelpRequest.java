@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -37,14 +38,14 @@ public class HelpRequest implements Serializable{
 	@ManyToMany
 	private List<AggressionType> typesOfViolences;
 	
-//	@OneToOne
-//	private Victim victim;
+	@ManyToOne
+	private Victim victim;
 	
 	@ManyToOne
 	private Aggressor aggressor;
 	
-//	@ManyToOne
-//	private Relationship relationship;
+	@ManyToOne
+	private Relationship relationship;
 	
 	@Lob
 	@Column(name = "description", length = 4000)

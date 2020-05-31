@@ -17,11 +17,11 @@ public class HelpRequestModel implements Serializable{
 	
 	private List<AggressionTypeModel> typesOfViolences = new ArrayList<>();
 	
-//	private VictimModel victim;
+	private VictimModel victim;
 	
 	private AggressorModel aggressor;
 	
-//	private RelationshipModel relationship;
+	private RelationshipModel relationship;
 	
 	private String description;
 	
