@@ -1,8 +1,11 @@
 package com.gonzalitos.web.app.services;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,10 +50,23 @@ public class RelationshipService {
 		return relationship;
 	}
 	
+	public Page<Relationship> toList(Pageable paginable, String q) {
+		return relationshipRepository.searchActives(paginable, "%" + q + "%");
+	}
+
+	public Page<Relationship> toList(Pageable paginable) {
+		return relationshipRepository.searchActives(paginable);
+	}
+	
+	public List<Relationship> toList() {
+		return relationshipRepository.searchActives();
+	}
+	
 	public RelationshipModel search(String id) {
 		Relationship relationship = relationshipRepository.getOne(id);
 		return relationshipConverter.entityToModel(relationship);
 	}
+		
 	
 		
 }

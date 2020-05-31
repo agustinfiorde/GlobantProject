@@ -1,8 +1,11 @@
 package com.gonzalitos.web.app.services;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,6 +49,18 @@ public class HelpRequestService {
 	public HelpRequestModel search(String id) {
 		HelpRequest helpRequest = helpRequestRepository.getOne(id);
 		return helpRequestConverter.entityToModel(helpRequest);
+	}
+	
+	public Page<HelpRequest> toList(Pageable paginable, String q) {
+		return helpRequestRepository.searchActives(paginable, "%" + q + "%");
+	}
+
+	public Page<HelpRequest> toList(Pageable paginable) {
+		return helpRequestRepository.searchActives(paginable);
+	}
+	
+	public List<HelpRequest> toList() {
+		return helpRequestRepository.searchActives();
 	}
 		
 }

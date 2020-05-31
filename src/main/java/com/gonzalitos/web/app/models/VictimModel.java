@@ -1,8 +1,5 @@
 package com.gonzalitos.web.app.models;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import lombok.Data;
 
 @Data
@@ -21,7 +18,7 @@ public class VictimModel {
 	private Boolean whistleblower;
 	private String ipAddress;
 	
-	private List<AggressorModel> aggressorsModel = new ArrayList<>();
+//	private List<AggressorModel> aggressorsModel = new ArrayList<>();
 
 	private String removeString;
 	

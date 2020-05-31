@@ -2,12 +2,10 @@ package com.gonzalitos.web.app.entities;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -38,8 +36,8 @@ public class Victim implements Serializable{
 	private Boolean whistleblower;
 	private String ipAddress;
 	
-	@ManyToMany
-	private List<Aggressor> aggressors; //change List<Aggressor> to List<AggressorModel> in victimModel
+//	@ManyToMany
+//	private List<Aggressor> aggressors; //change List<Aggressor> to List<AggressorModel> in victimModel
 	
 	@Temporal(TemporalType.TIMESTAMP) //change Date to String in victimModel
 	private Date remove; 

@@ -51,7 +51,7 @@
 				<hr style="margin-top:10px; margin-bottom:5px;"/>
 				
 				<li th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
-					<a th:href="@{/typeofviolence/list}">
+					<a th:href="@{/aggressiontype/list}">
 						<i class="fa fa-circle"></i>
 						<span>Tipos de Violencia</span>
 					</a>
@@ -64,14 +64,14 @@
 					</a>
 				</li>
 				
-				<hr style="margin-top:10px; margin-bottom:5px;"/>
+<!-- 				<hr style="margin-top:10px; margin-bottom:5px;"/> -->
 				
-				<li th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
-					<a th:href="@{/user/list}">
-						<i class="fa fa-users-cog"></i>
-						<span>Gestion de Usuarios</span>
-					</a>
-				</li>
+<!-- 				<li th:if="${#authorization.expression('hasRole(''ADMIN'')')}"> -->
+<!-- 					<a th:href="@{/user/list}"> -->
+<!-- 						<i class="fa fa-users-cog"></i> -->
+<!-- 						<span>Gestion de Usuarios</span> -->
+<!-- 					</a> -->
+<!-- 				</li> -->
 
 			</ul>
 		</section>

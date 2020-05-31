@@ -15,14 +15,14 @@
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
 				<h1>
-					AGRESORES <small>Utilice este módulo para gestionar los Agresores registrados.</small>
+					Agresores <small>Utilice este módulo para gestionar Agresores registrados.</small>
 				</h1>
 				<ol class="breadcrumb">
 					<li><a href="/">
 							<i class="fa fa-dashboard"></i>
 							Home
 						</a></li>
-					<li><a href="#">Madres de Pie</a></li>
+					<li><a href="#">Gonzalitos</a></li>
 					<li class="active">Agresores</li>
 				</ol>
 			</section>
@@ -39,7 +39,7 @@
 						<div class="pull-left">
 							<form th:action="@{/aggressor/list}">
 								<div class="input-group">
-									<input type="text" name="q" class="form-control" placeholder="Buscar..." th:value="${q}" />
+									<input type="text" name="q" class="form-control" placeholder="Buscar por Nombre o Apellido o Dni" th:value="${q}" />
 									<span class="input-group-btn">
 										<button type="submit" name="search" id="search-btn" class="btn btn-flat">
 											<i class="fa fa-search"></i>
@@ -51,7 +51,7 @@
 						</div>
 						<div class="box-tools pull-right">
 
-							<a class="btn btn-xs btn-default" data-toggle="tooltip" title="Crear" th:href="@{/aggressor/formulario}" style="font-size: 25px; min-width: 40px;">
+							<a class="btn btn-xs btn-default" data-toggle="tooltip" title="Crear" th:href="@{/aggressor/form}" style="font-size: 25px; min-width: 40px;">
 								<i class="fa fa-plus"></i>
 							</a>
 						</div>
@@ -77,16 +77,16 @@
 									<tbody>
 										<tr th:each="objeto : ${page}">
 											<td th:text="${objeto.name}+' '+${objeto.secondName}">Nombres</td>
-											<td th:text="${objeto.apellido}">Apellido</td>
+											<td th:text="${objeto.lastName}">Apellido</td>
 											<td th:text="${objeto.dni}">DNI</td>
 
-											<td th:if="${url eq '/aggressor/papelera' or url eq '/aggressor/auditoria'}" th:text="${objeto.fechaAlta} ? ${#dates.format(objeto.fechaAlta, 'dd-MM-yyyy HH:mm')}">Alta</td>
-											<td th:if="${url eq '/aggressor/papelera' or url eq '/aggressor/auditoria'}" th:text="${objeto.fechaModificacion} ? ${#dates.format(objeto.fechaModificacion, 'dd-MM-yyyy HH:mm')}">Modificación</td>
-											<td th:if="${url eq '/aggressor/papelera' or url eq '/aggressor/auditoria'}" th:text="${objeto.fechaBaja} ? ${#dates.format(objeto.fechaBaja, 'dd-MM-yyyy HH:mm')}">Baja</td>
+											<td th:if="${url eq '/aggressor/papelera' or url eq '/aggressor/auditoria'}" th:text="${objeto.registered} ? ${#dates.format(objeto.registered, 'dd-MM-yyyy HH:mm')}">Alta</td>
+											<td th:if="${url eq '/aggressor/papelera' or url eq '/aggressor/auditoria'}" th:text="${objeto.edited} ? ${#dates.format(objeto.edited, 'dd-MM-yyyy HH:mm')}">Modificación</td>
+											<td th:if="${url eq '/aggressor/papelera' or url eq '/aggressor/auditoria'}" th:text="${objeto.remove} ? ${#dates.format(objeto.remove, 'dd-MM-yyyy HH:mm')}">Baja</td>
 											<td style="text-align: right;">
-												<a th:if="${url eq '/aggressor/listado'}" th:href="@{/aggressor/formulario(accion=actualizar,id=__${objeto.id}__)}" class="icono_accion fa fa-pencil-alt"></a>
-												<a th:if="${url eq '/aggressor/listado'}" th:href="@{/aggressor/formulario(accion=eliminar,id=__${objeto.id}__)}" class="icono_accion fa fa-trash"></a>
-												<a th:if="${url eq '/aggressor/papelera'}" th:href="@{/aggressor/formulario(accion=recuperar,id=__${objeto.id}__)}" class="icono_accion fa fa-undo"></a>
+												<a th:if="${url eq '/aggressor/list'}" th:href="@{/aggressor/form(accion=actualizar,id=__${objeto.id}__)}" class="icono_accion fa fa-pencil-alt"></a>
+												<a th:if="${url eq '/aggressor/list'}" th:href="@{/aggressor/form(accion=eliminar,id=__${objeto.id}__)}" class="icono_accion fa fa-trash"></a>
+												<a th:if="${url eq '/aggressor/papelera'}" th:href="@{/aggressor/form(accion=recuperar,id=__${objeto.id}__)}" class="icono_accion fa fa-undo"></a>
 											</td>
 										</tr>
 									</tbody>

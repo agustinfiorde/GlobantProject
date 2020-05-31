@@ -15,6 +15,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -41,8 +42,9 @@ public class EmergencyController extends OwnController {
 		super("emergency-list", "emergency-form");
 	}
 
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/save")
-	public String guardar(HttpSession session, @Valid @ModelAttribute(AGGRESSOR_LABEL) EmergencyModel m, BindingResult result, ModelMap modelo) {
+	public String save(HttpSession session, @Valid @ModelAttribute(AGGRESSOR_LABEL) EmergencyModel m, BindingResult result, ModelMap modelo) {
 		log.info("METODO: emergency.save() -- PARAMETROS: " + m);
 		try {
 			if (result.hasErrors()) {
@@ -60,8 +62,9 @@ public class EmergencyController extends OwnController {
 		return formView;
 	}
 
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/delete")
-	public String eliminar(@ModelAttribute(AGGRESSOR_LABEL) EmergencyModel m, ModelMap model) {
+	public String delete(@ModelAttribute(AGGRESSOR_LABEL) EmergencyModel m, ModelMap model) {
 		log.info("METODO: emergency.delete() -- PARAMETROS: " + m);
 		model.addAttribute(ACCION_LABEL, "eliminar");
 		try {
@@ -73,8 +76,9 @@ public class EmergencyController extends OwnController {
 		}
 	}
 
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/form")
-	public ModelAndView formulario(@RequestParam(required = false) String id, @RequestParam(required = false) String accion) {
+	public ModelAndView form(@RequestParam(required = false) String id, @RequestParam(required = false) String accion) {
 		ModelAndView model = new ModelAndView(formView);
 		EmergencyModel emergency = new EmergencyModel();
 		if (accion == null || accion.isEmpty()) {
@@ -90,8 +94,9 @@ public class EmergencyController extends OwnController {
 		return model;
 	}
 
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/list")
-	public ModelAndView listar(HttpSession session, Pageable paginable, @RequestParam(required = false) String q) {
+	public ModelAndView list(HttpSession session, Pageable paginable, @RequestParam(required = false) String q) {
 		ModelAndView modelo = new ModelAndView(listView);
 
 		Page<Emergency> page = null;

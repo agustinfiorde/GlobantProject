@@ -16,15 +16,15 @@
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
 				<h1>
-					ODS <small>Utilice este módulo para gestionar Objetivos de Desarrollo Sostenible.</small>
+					Vinculos <small>Utilice este módulo para gestionar Vinculos.</small>
 				</h1>
 				<ol class="breadcrumb">
 					<li><a href="#">
 							<i class="fa fa-dashboard"></i>
 							Home
 						</a></li>
-					<li><a href="#">MapUncu</a></li>
-					<li class="active">ODS</li>
+					<li><a href="#">Gonzalitos</a></li>
+					<li class="active">Vinculos</li>
 				</ol>
 			</section>
 
@@ -34,7 +34,7 @@
 				<!-- Default box -->
 				<div class="box">
 					<div class="box-header with-border">
-						<h3 class="box-title" style="margin-top: 10px;">Actualizar ODS</h3>
+						<h3 class="box-title" style="margin-top: 10px;">Actualizar Vinculos</h3>
 					</div>
 					<div class="box-body">
 
@@ -42,40 +42,36 @@
 							<strong>¡Error!</strong> <span th:text="${error}">error</span>
 						</div>
 
-						<div th:if="${accion == 'eliminar'}" class="alert alert-danger" role="alert">
-							<strong>¡Alto!</strong> ¿Se encuentra seguro de que desea proceder con la eliminación del ods?
+						<div th:if="${accion == 'delete'}" class="alert alert-danger" role="alert">
+							<strong>¡Alto!</strong> ¿Se encuentra seguro de que desea proceder con la eliminación de la Relación?
 						</div>
 
 						<div th:if="${accion == 'recuperar'}" class="alert alert-danger" role="alert">
-							<strong>¡Alto!</strong> ¿Se encuentra seguro de que desea proceder con la recuperación del ods?
+							<strong>¡Alto!</strong> ¿Se encuentra seguro de que desea proceder con la recuperación de la Relación?
 						</div>
 
-						<form class="vertical-form" id="formulario" method="POST" th:action="@{/ods/} + ${accion == null or accion == 'actualizar' ? 'guardar' : accion}" th:object="${relationship}">
+						<form class="vertical-form" id="form" method="POST" th:action="@{/relationship/} + ${accion == null or accion == 'update' ? 'save' : accion}" th:object="${relationship}">
 
 							<input type="hidden" class="form-control" th:field="*{id}" th:value="*{id}" />
 							
-<!-- 							<div class="form-group"> -->
-<!-- 								<label for="nombre">Numero</label> -->
-<!-- 								<input type="text" class="form-control" id="nombre" placeholder="Ingrese el numero del ODS" th:field="*{numero}" th:value="*{numero}" th:disabled="${accion == 'eliminar'}" /> -->
-<!-- 							</div> -->
 							
 							<div class="form-group">
 								<label for="nombre">Nombre</label>
-								<input type="text" class="form-control" id="nombre" placeholder="Ingrese el nombre del ODS" th:field="*{name}" th:value="*{name}" th:disabled="${accion == 'eliminar'}" />
+								<input type="text" class="form-control" id="nombre" placeholder="Ingrese el nombre del ODS" th:field="*{name}" th:value="*{name}" th:disabled="${accion == 'delete'}" />
 							</div>
 
 							<div class="form-group">
 								<label for="nombre">Descripción</label>
-								<textarea class="form-control" id="descripcion" th:field="*{description}" th:value="*{description}" rows="5" th:disabled="${accion == 'eliminar'}"></textarea>
+								<textarea class="form-control" id="descripcion" th:field="*{description}" th:value="*{description}" rows="5" th:disabled="${accion == 'delete'}"></textarea>
 							</div>
 
 						</form>
 
-						<button type="submit" class="btn btn-danger" form="formulario" th:if="${accion == 'eliminar'}">Eliminar</button>
-						<button type="submit" class="btn btn-success" form="formulario" th:if="${accion == null or accion == 'guardar'}">Guardar</button>
-						<button type="submit" class="btn btn-primary" form="formulario" th:if="${accion == 'actualizar'}">Actualizar</button>
+						<button type="submit" class="btn btn-danger" form="form" th:if="${accion == 'delete'}">Eliminar</button>
+						<button type="submit" class="btn btn-success" form="form" th:if="${accion == null or accion == 'save'}">Guardar</button>
+						<button type="submit" class="btn btn-primary" form="form" th:if="${accion == 'update'}">Actualizar</button>
 
-						<a th:href="@{/ods/listado}">
+						<a th:href="@{/relationship/list}">
 							<button type="button" class="btn btn-default">Cancelar</button>
 						</a>
 					</div>

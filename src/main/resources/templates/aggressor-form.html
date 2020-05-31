@@ -16,7 +16,7 @@
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
 				<h1>
-					Pedidos de Ayuda <small>Utilice este módulo para gestionar Pedidos de Ayuda.</small>
+					Agresores <small>Utilice este módulo para gestionar Agresores.</small>
 				</h1>
 				<ol class="breadcrumb">
 					<li><a href="#">
@@ -24,7 +24,7 @@
 							Home
 						</a></li>
 					<li><a href="#">Gonzalitos</a></li>
-					<li class="active">Pedidos de Ayuda</li>
+					<li class="active">Agresores</li>
 				</ol>
 			</section>
 
@@ -34,7 +34,7 @@
 				<!-- Default box -->
 				<div class="box">
 					<div class="box-header with-border">
-						<h3 class="box-title" style="margin-top: 10px;">Actualizar Pedido de Ayuda</h3>
+						<h3 class="box-title" style="margin-top: 10px;">Actualizar Agresor</h3>
 					</div>
 					<div class="box-body">
 
@@ -42,31 +42,36 @@
 							<strong>¡Error!</strong> <span th:text="${error}">error</span>
 						</div>
 
-						<div th:if="${accion == 'eliminar'}" class="alert alert-danger" role="alert">
-							<strong>¡Alto!</strong> ¿Se encuentra seguro de que desea proceder con la eliminación del Pedido de Ayuda?
+						<div th:if="${accion == 'delete'}" class="alert alert-danger" role="alert">
+							<strong>¡Alto!</strong> ¿Se encuentra seguro de que desea proceder con la eliminación del Agresor?
 						</div>
 
 						<div th:if="${accion == 'recuperar'}" class="alert alert-danger" role="alert">
-							<strong>¡Alto!</strong> ¿Se encuentra seguro de que desea proceder con la recuperación del Pedido de Ayuda?
+							<strong>¡Alto!</strong> ¿Se encuentra seguro de que desea proceder con la recuperación del Agresor?
 						</div>
 
-						<form class="vertical-form" id="formulario" method="POST" th:action="@{/helprequest/} + ${accion == null or accion == 'update' ? 'save' : accion}" th:object="${helprequest}">
+						<form class="vertical-form" id="formulario" method="POST" th:action="@{/aggressor/} + ${accion == null or accion == 'update' ? 'save' : accion}" th:object="${aggressor}">
 
 							<input type="hidden" class="form-control" th:field="*{id}" th:value="*{id}" />
 							
 							<div class="form-group">
-								<label for="nombre">Nombre y Apellido Victima</label>
-								<input type="text" class="form-control" id="nombre" placeholder="Ingrese el numero del ODS" th:field="*{numero}" th:value="*{numero}" th:disabled="${accion == 'delete'}" />
+								<label for="nombre">Nombre</label>
+								<input type="text" class="form-control" id="name" placeholder="Ingrese Nombre del Agresor" th:field="*{name}" th:value="*{name}" th:disabled="${accion == 'delete'}" />
 							</div>
 							
 							<div class="form-group">
-								<label for="nameAggressor">Nombre y Apellido Agresor</label>
-								<input type="text" class="form-control" id="nombreLastNameAggressor" placeholder="Ingrese el nombre del ODS" th:field="*{nombre}" th:value="*{nombre}" th:disabled="${accion == 'delete'}" />
+								<label for="nombre">Segundo Nombre</label>
+								<input type="text" class="form-control" id="secondName" placeholder="Ingrese Segundo Nombre del Agresor" th:field="*{secondName}" th:value="*{secondName}" th:disabled="${accion == 'delete'}" />
+							</div>
+							
+							<div class="form-group">
+								<label for="nombre">Apellido</label>
+								<input type="text" class="form-control" id="lastName" placeholder="Ingrese Apellido del Agresor" th:field="*{lastName}" th:value="*{lastName}" th:disabled="${accion == 'delete'}" />
 							</div>
 
 							<div class="form-group">
-								<label for="typesOfViolences">Tipos de Agresiones</label>
-								<textarea class="form-control" id="descripcion" th:field="*{descripcion}" th:value="*{descripcion}" rows="5" th:disabled="${accion == 'delete'}"></textarea>
+								<label for="description">DNI</label>
+								<textarea class="form-control" id="dni" th:field="*{dni}" th:value="*{dni}" rows="5" th:disabled="${accion == 'delete'}"></textarea>
 							</div>
 
 						</form>
@@ -75,7 +80,7 @@
 						<button type="submit" class="btn btn-success" form="formulario" th:if="${accion == null or accion == 'save'}">Guardar</button>
 						<button type="submit" class="btn btn-primary" form="formulario" th:if="${accion == 'update'}">Actualizar</button>
 
-						<a th:href="@{/helprequest/list}">
+						<a th:href="@{/aggressor/list}">
 							<button type="button" class="btn btn-default">Cancelar</button>
 						</a>
 					</div>

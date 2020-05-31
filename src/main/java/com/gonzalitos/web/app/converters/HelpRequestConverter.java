@@ -23,14 +23,14 @@ public class HelpRequestConverter extends OwnConverter<HelpRequestModel, HelpReq
 	@Autowired 
 	private AggressionTypeConverter aggressionTypeConverter;
 	
-//	@Autowired 
-//	private VictimConverter victimConverter;
+	@Autowired 
+	private VictimConverter victimConverter;
 	
-//	@Autowired 
-//	private AggressorConverter aggressorConverter;
+	@Autowired 
+	private AggressorConverter aggressorConverter;
 	
-//	@Autowired 
-//	private RelationshipConverter relationShipConverter;
+	@Autowired 
+	private RelationshipConverter relationShipConverter;
 	
 	public HelpRequestModel entityToModel(HelpRequest entity) {
 		HelpRequestModel model = new HelpRequestModel();
@@ -39,15 +39,15 @@ public class HelpRequestConverter extends OwnConverter<HelpRequestModel, HelpReq
 			if (entity.getTypesOfViolences()!=null) {
 				model.setTypesOfViolences(aggressionTypeConverter.entitiesToModels(entity.getTypesOfViolences()));
 			}
-//			if (entity.getVictim()!=null) {
-//				model.setVictim(victimConverter.entityToModel(entity.getVictim()));
-//			}
-//			if (entity.getAggressor()!=null) {
-//				model.setAggressor(aggressorConverter.entityToModel(entity.getAggressor()));
-//			}
-//			if (entity.getRelationship()!=null) {
-//				model.setRelationship(relationShipConverter.entityToModel(entity.getRelationship()));
-//			}
+			if (entity.getVictim()!=null) {
+				model.setVictim(victimConverter.entityToModel(entity.getVictim()));
+			}
+			if (entity.getAggressor()!=null) {
+				model.setAggressor(aggressorConverter.entityToModel(entity.getAggressor()));
+			}
+			if (entity.getRelationship()!=null) {
+				model.setRelationship(relationShipConverter.entityToModel(entity.getRelationship()));
+			}
 		} catch (Exception e) {
 			log.error("Error al convertir la entidad en el modelo del Pedido de ayuda", e);
 		}
@@ -98,9 +98,9 @@ public class HelpRequestConverter extends OwnConverter<HelpRequestModel, HelpReq
 			object.put("address", helpRequest.getAddress());
 			object.put("factTime", helpRequest.getFactTime());
 			object.put("typesOfViolences", aggressionTypeConverter.entitiesTOJSON(helpRequest.getTypesOfViolences()));
-//			object.put("victim", victimConverter.entityTOJSON(helpRequest.getVictim()));
-//			object.put("aggressor", aggressorConverter.entityTOJSON(helpRequest.getAggressor()));
-//			object.put("relationShip", relationShipConverter.entityTOJSON(helpRequest.getRelationship()));
+			object.put("victim", victimConverter.entityTOJSON(helpRequest.getVictim()));
+			object.put("aggressor", aggressorConverter.entityTOJSON(helpRequest.getAggressor()));
+			object.put("relationShip", relationShipConverter.entityTOJSON(helpRequest.getRelationship()));
 			object.put("description", helpRequest.getDescription());
 			return object;
 		} catch (JSONException e) {
