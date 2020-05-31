@@ -14,6 +14,7 @@ public final class Texts {
 	public static final String TOKEN = "token";
 	
 	public static final String PAGE_LABEL = "page";
+	public static final String VICTIM_LABEL = "victim";
 	public static final String ACCION_LABEL = "accion";
 	public static final String QUERY_LABEL = "q";
 	public static final String SAVE_LABEL = "save";

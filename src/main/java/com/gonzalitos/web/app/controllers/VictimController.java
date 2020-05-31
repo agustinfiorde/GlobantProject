@@ -8,6 +8,7 @@ import static com.gonzalitos.web.app.utils.Texts.QUERY_LABEL;
 import static com.gonzalitos.web.app.utils.Texts.SAVE_LABEL;
 import static com.gonzalitos.web.app.utils.Texts.UNEXPECTED_ERROR;
 import static com.gonzalitos.web.app.utils.Texts.URL_LABEL;
+import static com.gonzalitos.web.app.utils.Texts.VICTIM_LABEL;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -111,7 +112,7 @@ public class VictimController extends OwnController {
 		log.info("METODO: victim.toList() -- PARAMETROS: " + paginable);
 
 		modelo.addObject(URL_LABEL, "/victim/list");
-		modelo.addObject(AGGRESSOR_LABEL, new VictimModel());
+		modelo.addObject(VICTIM_LABEL, new VictimModel());
 		return modelo;
 	}
 

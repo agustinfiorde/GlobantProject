@@ -22,7 +22,7 @@
 							<i class="fa fa-dashboard"></i>
 							Home
 						</a></li>
-					<li><a href="#">MapUncu</a></li>
+					<li><a href="#">Gonzalitos</a></li>
 					<li class="active">Victimas</li>
 				</ol>
 			</section>
@@ -37,9 +37,9 @@
 						<br />
 						<br />
 						<div class="pull-left">
-							<form th:action="@{/ods/listado}">
+							<form th:action="@{/victim/list}">
 								<div class="input-group">
-									<input type="text" name="q" class="form-control" placeholder="Buscar..." th:value="${q}" />
+									<input type="text" name="q" class="form-control" placeholder="Buscar por nombre, apellido o DNI" th:value="${q}" />
 									<span class="input-group-btn">
 										<button type="submit" name="search" id="search-btn" class="btn btn-flat">
 											<i class="fa fa-search"></i>
@@ -51,9 +51,9 @@
 						</div>
 						<div class="box-tools pull-right">
 
-							<a class="btn btn-xs btn-default" data-toggle="tooltip" title="Crear" th:href="@{/ods/formulario}" style="font-size: 25px; min-width: 40px;">
-								<i class="fa fa-plus"></i>
-							</a>
+<!-- 							<a class="btn btn-xs btn-default" data-toggle="tooltip" title="Crear" th:href="@{/victim/formulario}" style="font-size: 25px; min-width: 40px;"> -->
+<!-- 								<i class="fa fa-plus"></i> -->
+<!-- 							</a> -->
 						</div>
 					</div>
 					<div class="box-body">
@@ -65,28 +65,28 @@
 								<table class="table table-striped table-sm">
 									<thead class="thead-inverse">
 										<tr>
-											<th>Numero</th>
+											<th>Nombre y Apellido</th>
 											<th>Nombre</th>
 											<th>Descripción</th>
-											<th th:if="${url eq '/ods/papelera' or url eq '/ods/auditoria'}">Alta</th>
-											<th th:if="${url eq '/ods/papelera' or url eq '/ods/auditoria'}">Modificación</th>
-											<th th:if="${url eq '/ods/papelera' or url eq '/ods/auditoria'}">Baja</th>
+											<th th:if="${url eq '/victim/papelera' or url eq '/victim/auditoria'}">Alta</th>
+											<th th:if="${url eq '/victim/papelera' or url eq '/victim/auditoria'}">Modificación</th>
+											<th th:if="${url eq '/victim/papelera' or url eq '/victim/auditoria'}">Baja</th>
 											<th style="text-align: right;">Acciones</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr th:each="objeto : ${page}">
-											<td th:text="${objeto.numero}">Nombre</td>
+											<td th:text="${objeto.name}+ ' ' +${objeto.lastName}">Nombre y Apellido</td>
 											<td th:text="${objeto.nombre}">Nombre</td>
 											<td th:text="${objeto.descripcion}">Descripcion</td>
 
-											<td th:if="${url eq '/ods/papelera' or url eq '/ods/auditoria'}" th:text="${objeto.fechaAlta} ? ${#dates.format(objeto.fechaAlta, 'dd-MM-yyyy HH:mm')}">Alta</td>
-											<td th:if="${url eq '/ods/papelera' or url eq '/ods/auditoria'}" th:text="${objeto.fechaModificacion} ? ${#dates.format(objeto.fechaModificacion, 'dd-MM-yyyy HH:mm')}">Modificación</td>
-											<td th:if="${url eq '/ods/papelera' or url eq '/ods/auditoria'}" th:text="${objeto.fechaBaja} ? ${#dates.format(objeto.fechaBaja, 'dd-MM-yyyy HH:mm')}">Baja</td>
+											<td th:if="${url eq '/victim/papelera' or url eq '/victim/auditoria'}" th:text="${objeto.fechaAlta} ? ${#dates.format(objeto.fechaAlta, 'dd-MM-yyyy HH:mm')}">Alta</td>
+											<td th:if="${url eq '/victim/papelera' or url eq '/victim/auditoria'}" th:text="${objeto.fechaModificacion} ? ${#dates.format(objeto.fechaModificacion, 'dd-MM-yyyy HH:mm')}">Modificación</td>
+											<td th:if="${url eq '/victim/papelera' or url eq '/victim/auditoria'}" th:text="${objeto.fechaBaja} ? ${#dates.format(objeto.fechaBaja, 'dd-MM-yyyy HH:mm')}">Baja</td>
 											<td style="text-align: right;">
-												<a th:if="${url eq '/ods/listado'}" th:href="@{/ods/formulario(accion=actualizar,id=__${objeto.id}__)}" class="icono_accion fa fa-pencil-alt"></a>
-												<a th:if="${url eq '/ods/listado'}" th:href="@{/ods/formulario(accion=eliminar,id=__${objeto.id}__)}" class="icono_accion fa fa-trash"></a>
-												<a th:if="${url eq '/ods/papelera'}" th:href="@{/ods/formulario(accion=recuperar,id=__${objeto.id}__)}" class="icono_accion fa fa-undo"></a>
+												<a th:if="${url eq '/victim/listado'}" th:href="@{/victim/form(accion=actualizar,id=__${objeto.id}__)}" class="icono_accion fa fa-pencil-alt"></a>
+												<a th:if="${url eq '/victim/listado'}" th:href="@{/victim/form(accion=delete,id=__${objeto.id}__)}" class="icono_accion fa fa-trash"></a>
+												<a th:if="${url eq '/victim/papelera'}" th:href="@{/victim/form(accion=recuperar,id=__${objeto.id}__)}" class="icono_accion fa fa-undo"></a>
 											</td>
 										</tr>
 									</tbody>
