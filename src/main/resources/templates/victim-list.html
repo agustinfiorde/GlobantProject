@@ -69,6 +69,7 @@
 											<th>DNI</th>
 											<th>Telefono</th>
 											<th>eMail</th>
+											<th>Fecha de Nac</th>
 											
 <!-- 											<th th:if="${url eq '/victim/papelera' or url eq '/victim/auditoria'}">Alta</th> -->
 <!-- 											<th th:if="${url eq '/victim/papelera' or url eq '/victim/auditoria'}">Modificación</th> -->
@@ -82,6 +83,7 @@
 											<td th:text="${objeto.dni}">DNI</td>
 											<td th:text="${objeto.phone}">Telefono</td>
 											<td th:text="${objeto.email}">eMail</td>
+											<td th:text="${objeto.dateBornString}">Fecha de Nac</td>
 
 <!-- 											<td th:if="${url eq '/victim/papelera' or url eq '/victim/auditoria'}" th:text="${objeto.fechaAlta} ? ${#dates.format(objeto.fechaAlta, 'dd-MM-yyyy HH:mm')}">Alta</td> -->
 <!-- 											<td th:if="${url eq '/victim/papelera' or url eq '/victim/auditoria'}" th:text="${objeto.fechaModificacion} ? ${#dates.format(objeto.fechaModificacion, 'dd-MM-yyyy HH:mm')}">Modificación</td> -->

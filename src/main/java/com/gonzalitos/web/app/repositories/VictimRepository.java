@@ -37,7 +37,9 @@ public interface VictimRepository extends JpaRepository<Victim, String>, PagingA
 			+ "AND a.name LIKE :q "
 			+ "OR a.lastName LIKE :q "
 			+ "OR a.dni LIKE :q "
-			+ "OR a.phone LIKE :q ")
+			+ "OR a.dateBornString LIKE :q "
+			+ "OR a.phone LIKE :q "
+			+ "OR a.email LIKE :q ")
 	public Page<Victim> searchActives(Pageable pageable, @Param("q") String q);
 	
 	Victim findByDni(String dni);
