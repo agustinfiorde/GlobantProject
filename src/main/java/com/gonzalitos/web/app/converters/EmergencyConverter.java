@@ -10,9 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.gonzalitos.web.app.entities.Emergency;
+import com.gonzalitos.web.app.entities.Victim;
 import com.gonzalitos.web.app.errors.WebException;
 import com.gonzalitos.web.app.models.EmergencyModel;
 import com.gonzalitos.web.app.repositories.EmergencyRepository;
+import com.gonzalitos.web.app.repositories.VictimRepository;
 
 
 @Component("EmergencyConverter")
@@ -20,6 +22,9 @@ public class EmergencyConverter  extends OwnConverter<EmergencyModel, Emergency>
 
 	@Autowired
 	private EmergencyRepository emergencyRepository;
+	
+	@Autowired
+	private VictimRepository victimRepository;
 	
 	public EmergencyModel entidadToModelo(Emergency entity){
 		EmergencyModel model = new EmergencyModel();
@@ -33,18 +38,33 @@ public class EmergencyConverter  extends OwnConverter<EmergencyModel, Emergency>
 	}
 	
 	public Emergency modeloToEntidad(EmergencyModel model){
-		Emergency financiamiento = new Emergency();
+		Emergency emergency = new Emergency();
 		if(model.getId() != null && !model.getId().isEmpty()){
-			financiamiento = emergencyRepository.getOne(model.getId());
+			emergency = emergencyRepository.getOne(model.getId());
 		}
 		
 		try {
-			BeanUtils.copyProperties(model, financiamiento);
+			emergency.setAddress(model.getAddress());
+//			emergency.setCity(model.getCity());
+			if (emergency.getVictim() == null) {
+				Victim victim = new Victim();
+				victim.setName(model.getVictim().getName());
+				victim.setLastName(model.getVictim().getLastName());
+				victim.setDni(model.getVictim().getDni());
+				victim = victimRepository.save(victim);
+				emergency.setVictim(victim);
+				
+			}else {
+				emergency.getVictim().setName(model.getVictim().getName());
+				emergency.getVictim().setLastName(model.getVictim().getLastName());
+				emergency.getVictim().setDni(model.getVictim().getDni());
+			}
+			
 		} catch (Exception e) {
 			log.error("Error al convertir el modelo del Agresor en entidad", e);
 		}
 		
-		return financiamiento;
+		return emergency;
 	}
 	
 	public List<EmergencyModel> entidadesToModelos(List<Emergency> financiamientos ){

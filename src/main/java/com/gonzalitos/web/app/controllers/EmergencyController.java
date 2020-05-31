@@ -6,8 +6,8 @@ import static com.gonzalitos.web.app.utils.Texts.ERROR;
 import static com.gonzalitos.web.app.utils.Texts.PAGE_LABEL;
 import static com.gonzalitos.web.app.utils.Texts.QUERY_LABEL;
 import static com.gonzalitos.web.app.utils.Texts.SAVE_LABEL;
-import static com.gonzalitos.web.app.utils.Texts.UNEXPECTED_ERROR;
 import static com.gonzalitos.web.app.utils.Texts.URL_LABEL;
+import static com.gonzalitos.web.app.utils.Texts.UNEXPECTED_ERROR;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -42,25 +42,27 @@ public class EmergencyController extends OwnController {
 		super("emergency-list", "emergency-form");
 	}
 
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	@PostMapping("/save")
-	public String save(HttpSession session, @Valid @ModelAttribute(AGGRESSOR_LABEL) EmergencyModel m, BindingResult result, ModelMap modelo) {
-		log.info("METODO: emergency.save() -- PARAMETROS: " + m);
-		try {
-			if (result.hasErrors()) {
-				error(modelo, result);
-			} else {
-				emergencyService.save(m);
-				return "redirect:/emergency/list";
-			}
-		} catch (WebException e) {
-			modelo.addAttribute(ERROR, "Ocurrió un error al intentar modificar el Agresor. " + e.getMessage());
-		} catch (Exception e) {
-			modelo.addAttribute(ERROR, "Ocurrió un error inesperado al intentar modificar el Agresor.");
-			log.error(UNEXPECTED_ERROR, e);
-		}
-		return formView;
-	}
+
+//	@PreAuthorize("hasRole('ROLE_ADMIN')")
+//	@PostMapping("/save")
+//	public String save(HttpSession session, @Valid @ModelAttribute(AGGRESSOR_LABEL) EmergencyModel m, BindingResult result, ModelMap modelo) {
+//		log.info("METODO: emergency.save() -- PARAMETROS: " + m);
+//		try {
+//			if (result.hasErrors()) {
+//				error(modelo, result);
+//			} else {
+//				//GENERA OTRO SAVE 
+////				emergencyService.save(m);
+//				return "redirect:/emergency/list";
+//			}
+//		} catch (WebException e) {
+//			modelo.addAttribute(ERROR, "Ocurrió un error al intentar modificar el Agresor. " + e.getMessage());
+//		} catch (Exception e) {
+//			modelo.addAttribute(ERROR, "Ocurrió un error inesperado al intentar modificar el Agresor.");
+//			log.error(UNEXPECTED_ERROR, e);
+//		}
+//		return formView;
+//	}
 
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/delete")
