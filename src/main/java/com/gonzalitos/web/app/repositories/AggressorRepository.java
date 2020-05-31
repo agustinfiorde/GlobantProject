@@ -21,6 +21,9 @@ public interface AggressorRepository extends JpaRepository<Aggressor, String>, P
 	@Query("SELECT a from Aggressor a")
 	public Page<Aggressor> findAll(Pageable pageable);
 
+	@Query("SELECT a FROM Aggressor a WHERE a.remove IS NULL AND a.dni = :dni")
+	public Aggressor searchByDni(@Param("dni") String dni);
+	
 	@Query("SELECT a from Aggressor a WHERE a.remove IS NULL AND a.dni LIKE :dni")
 	public Page<Aggressor> findActivesByDni(Pageable pageable, @Param("dni") String dni);
 	
@@ -30,8 +33,9 @@ public interface AggressorRepository extends JpaRepository<Aggressor, String>, P
 	@Query("SELECT a from Aggressor a WHERE a.remove IS NULL ORDER BY a.name")
 	public List<Aggressor> findActives();
 	
-	@Query("SELECT a from Aggressor a WHERE a.remove IS NULL AND a.name LIKE :q OR a.lastName LIKE :q OR a.dni LIKE :q ")
-	public Page<Aggressor> findActives(Pageable pageable, @Param("q") String q);
+	Aggressor findByDni(String dni);
+	
 	
 
+	
 }

@@ -29,7 +29,7 @@ public class VictimService {
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { WebException.class, Exception.class })
 	public Victim save(VictimModel model) throws WebException {
 		Victim victim = victimConverter.modelToEntity(model);
-		if (victim.getRemove() != null) {
+		if (victim.getRemoveString() != null) {
 			throw new WebException("La víctima que intenta modificar se encuentra dada de baja.");
 		}
 		if (victim.getName() == null || victim.getName().isEmpty()) {
@@ -41,8 +41,8 @@ public class VictimService {
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = { WebException.class, Exception.class })
 	public Victim delete(String id) throws WebException {
 		Victim victim = victimRepository.getOne(id);
-		if (victim.getRemove() == null) {
-			victim.setRemove(new Date());
+		if (victim.getRemoveString() == null) {
+			victim.setRemoveString(new Date().toString());
 			victim = victimRepository.save(victim);
 		} else {
 			throw new WebException("La víctima que intenta eliminar ya se encuentra dada de baja.");
@@ -64,6 +64,15 @@ public class VictimService {
 	
 	public VictimModel search(String id) {
 		Victim victim = victimRepository.getOne(id);
+		return victimConverter.entityToModel(victim);
+	}
+	
+	public Victim searchEntity(String id) {
+		return victimRepository.getOne(id);
+	}
+	
+	public VictimModel searchByDni(String dni) {
+		Victim victim = victimRepository.searchByDni(dni);
 		return victimConverter.entityToModel(victim);
 	}
 		

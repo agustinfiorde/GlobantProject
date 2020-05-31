@@ -65,6 +65,11 @@ public class AggressorService {
 		Aggressor aggressor = aggressorRepository.getOne(id);
 		return aggressorConverter.entityToModel(aggressor);
 	}
+	
+	public AggressorModel searchByDni(String dni) {
+		Aggressor aggressor = aggressorRepository.searchByDni(dni);
+		return aggressorConverter.entityToModel(aggressor);
+	}
 		
 }
 

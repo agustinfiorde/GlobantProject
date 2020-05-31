@@ -14,22 +14,19 @@ import com.gonzalitos.web.app.entities.Victim;
 import com.gonzalitos.web.app.models.VictimModel;
 import com.gonzalitos.web.app.repositories.VictimRepository;
 
-@Component("VictimConverter")
+@Component("victimConverter")
 public class VictimConverter extends OwnConverter<VictimModel, Victim> {
 
 	@Autowired
 	private VictimRepository victimRepository;
 
-//	@Autowired
-//	private AggressorConverter aggressorConverter;
 
 	public VictimModel entityToModel(Victim entity) {
 		VictimModel model = new VictimModel();
 		try {
-			BeanUtils.copyProperties(entity, model);
-//			if (entity.getAggressors() != null) {
-//				model.setAggressorsModel(aggressorConverter.entitiesToModels(entity.getAggressors()));
-//			}
+			if (entity != null) {
+				BeanUtils.copyProperties(entity, model);
+			}
 		} catch (Exception e) {
 			log.error("Error al convertir la entity en el modelo del Agresor", e);
 		}
@@ -89,7 +86,7 @@ public class VictimConverter extends OwnConverter<VictimModel, Victim> {
 			object.put("id", victim.getId());
 			object.put("name", victim.getName());
 			object.put("lastName", victim.getLastName());
-			object.put("dateBorn", victim.getDateBorn());
+			object.put("dateBorn", victim.getDateBornString());
 			object.put("phone", victim.getPhone());
 			object.put("email", victim.getEmail());
 			object.put("children", victim.getChildren());

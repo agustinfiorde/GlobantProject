@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -31,8 +32,7 @@ public class HelpRequest implements Serializable{
 
 	private String address;
 	
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date factTime;
+	private String factTimeString;
 
 	@ManyToMany
 	private List<AggressionType> typesOfViolences;

@@ -56,6 +56,10 @@ public class AggressionTypeService {
 		return aggressionTypeRepository.searchActives(paginable);
 	}
 	
+	public List<AggressionTypeModel> toListModel() {
+		return aggressionTypeConverter.entitiesToModels(aggressionTypeRepository.searchActives());
+	}
+	
 	public List<AggressionType> toList() {
 		return aggressionTypeRepository.searchActives();
 	}
