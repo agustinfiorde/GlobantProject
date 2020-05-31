@@ -7,10 +7,8 @@ import static com.gonzalitos.web.app.utils.Texts.PAGE_LABEL;
 import static com.gonzalitos.web.app.utils.Texts.QUERY_LABEL;
 import static com.gonzalitos.web.app.utils.Texts.SAVE_LABEL;
 import static com.gonzalitos.web.app.utils.Texts.URL_LABEL;
-import static com.gonzalitos.web.app.utils.Texts.UNEXPECTED_ERROR;
 
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,7 +16,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,7 +24,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gonzalitos.web.app.entities.Emergency;
-import com.gonzalitos.web.app.errors.WebException;
 import com.gonzalitos.web.app.models.EmergencyModel;
 import com.gonzalitos.web.app.services.EmergencyService;
 

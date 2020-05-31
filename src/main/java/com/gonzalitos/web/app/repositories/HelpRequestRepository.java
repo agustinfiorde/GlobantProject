@@ -39,8 +39,8 @@ public interface HelpRequestRepository
 			+ "OR a.secondName LIKE :q "
 			+ "OR a.lastName LIKE :q "
 			+ "OR a.dni LIKE :q "
-			+ "OR h.factTime LIKE :q "
-			+ "ORDER BY h.factTime ")
+			+ "OR h.factTimeString LIKE :q "
+			+ "ORDER BY h.factTimeString ")
 	public Page<HelpRequest> searchActives(Pageable pageable, @Param("q") String q);
 
 }

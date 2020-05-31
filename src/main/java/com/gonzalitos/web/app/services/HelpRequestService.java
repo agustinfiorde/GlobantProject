@@ -7,7 +7,6 @@ import java.util.List;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
-import org.hibernate.exception.spi.ViolatedConstraintNameExtracter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,9 +15,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.gonzalitos.web.app.converters.HelpRequestConverter;
-import com.gonzalitos.web.app.entities.Aggressor;
 import com.gonzalitos.web.app.entities.HelpRequest;
-import com.gonzalitos.web.app.entities.Victim;
 import com.gonzalitos.web.app.errors.WebException;
 import com.gonzalitos.web.app.models.AggressionTypeModel;
 import com.gonzalitos.web.app.models.AggressorModel;

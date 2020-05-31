@@ -33,8 +33,12 @@ public interface VictimRepository extends JpaRepository<Victim, String>, PagingA
 	@Query("SELECT a from Victim a WHERE a.removeString IS NULL ORDER BY a.name")
 	public List<Victim> searchActives();
 	
-	@Query("SELECT a from Victim a WHERE a.removeString IS NULL AND a.dni LIKE :dni")
-	public Page<Victim> searchActives(Pageable pageable, @Param("dni") String dni);
+	@Query("SELECT a from Victim a WHERE a.removeString IS NULL "
+			+ "AND a.name LIKE :q "
+			+ "OR a.lastName LIKE :q "
+			+ "OR a.dni LIKE :q "
+			+ "OR a.phone LIKE :q ")
+	public Page<Victim> searchActives(Pageable pageable, @Param("q") String q);
 	
 	Victim findByDni(String dni);
 	

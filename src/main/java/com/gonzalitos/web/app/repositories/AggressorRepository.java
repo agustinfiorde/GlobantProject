@@ -30,6 +30,9 @@ public interface AggressorRepository extends JpaRepository<Aggressor, String>, P
 	@Query("SELECT a from Aggressor a WHERE a.remove IS NULL")
 	public Page<Aggressor> findActives(Pageable pageable);
 	
+	@Query("SELECT a from Aggressor a WHERE a.remove IS NULL")
+	public Page<Aggressor> findActives(Pageable pageable, @Param("dni") String dni);
+	
 	@Query("SELECT a from Aggressor a WHERE a.remove IS NULL ORDER BY a.name")
 	public List<Aggressor> findActives();
 	

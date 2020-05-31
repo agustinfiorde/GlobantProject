@@ -3,7 +3,6 @@ package com.gonzalitos.web.app.converters;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.math3.stat.interval.AgrestiCoullInterval;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
@@ -23,9 +22,6 @@ import com.gonzalitos.web.app.repositories.AggressorRepository;
 import com.gonzalitos.web.app.repositories.HelpRequestRepository;
 import com.gonzalitos.web.app.repositories.RelationshipRepository;
 import com.gonzalitos.web.app.repositories.VictimRepository;
-import com.gonzalitos.web.app.services.AggressorService;
-import com.gonzalitos.web.app.services.RelationshipService;
-import com.gonzalitos.web.app.services.VictimService;
 
 @Component
 public class HelpRequestConverter extends OwnConverter<HelpRequestModel, HelpRequest>{

@@ -24,7 +24,7 @@ public class Emergency {
 	private String id;
 	
 	@ManyToOne
-	private Victim victim;//nombre apellido dni
+	private Victim victim;
 	
 	private String address;
 	
