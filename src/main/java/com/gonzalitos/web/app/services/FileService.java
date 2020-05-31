@@ -1,11 +1,13 @@
 package com.gonzalitos.web.app.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.gonzalitos.web.app.entities.File;
 import com.gonzalitos.web.app.entities.HelpRequest;
 import com.gonzalitos.web.app.repositories.FileRepository;
 
+@Service
 public class FileService {
 
 	@Autowired
