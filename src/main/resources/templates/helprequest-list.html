@@ -80,7 +80,7 @@
 									</thead>
 									<tbody>
 										<tr th:each="objeto : ${page}">
-											<td th:text="${objeto.factTime}">Fecha del Indicente</td>
+											<td th:text="${objeto.factTimeString}">Fecha del Indicente</td>
 											<td th:text="${objeto.victim.name}+ ' ' +${objeto.victim.lastName}">Victima</td>
 											<td th:text="${objeto.aggressor.name}+ ' ' +${objeto.aggressor.lastName}">Agresor</td>
 											<td> 

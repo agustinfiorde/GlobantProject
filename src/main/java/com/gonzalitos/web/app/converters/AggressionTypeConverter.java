@@ -14,7 +14,6 @@ import org.springframework.stereotype.Component;
 import com.gonzalitos.web.app.entities.AggressionType;
 import com.gonzalitos.web.app.models.AggressionTypeModel;
 import com.gonzalitos.web.app.repositories.AggressionTypeRepository;
-import com.gonzalitos.web.app.utils.Fecha;
 
 @Component("AggressionTypeConverter")
 public class AggressionTypeConverter extends OwnConverter<AggressionTypeModel, AggressionType> {
@@ -28,15 +27,15 @@ public class AggressionTypeConverter extends OwnConverter<AggressionTypeModel, A
 			BeanUtils.copyProperties(entity, model);
 			
 			if (entity.getRegistered() != null) {
-				model.setRegisteredString(Fecha.formatFechaGuiones(entity.getRegistered()));
+				model.setRegistered(entity.getRegistered());
 			}
 			
 			if (entity.getEdited() != null) {
-				model.setRegisteredString(Fecha.formatFechaGuiones(entity.getEdited()));
+				model.setRegistered((entity.getEdited()));
 			}
 			
 			if (entity.getRemove() != null) {
-				model.setRemoveString(Fecha.formatFechaGuiones(entity.getRemove()));
+				model.setRemove((entity.getRemove()));
 			}
 			
 		} catch (Exception e) {
@@ -55,16 +54,16 @@ public class AggressionTypeConverter extends OwnConverter<AggressionTypeModel, A
 		try {
 			BeanUtils.copyProperties(model, aggressionType);
 			
-			if (model.getRegisteredString() != null && !model.getRegisteredString().isEmpty()) {
-				Date fechaInicio = Fecha.parseFecha(model.getRegisteredString());
+			if (model.getRegistered() != null ) {
+				Date fechaInicio = (model.getRegistered());
 				aggressionType.setRegistered(fechaInicio);
 			}
-			if (model.getEditedString() != null && !model.getEditedString().isEmpty()) {
-				Date fechaInicio = Fecha.parseFecha(model.getEditedString());
+			if (model.getEdited() != null ) {
+				Date fechaInicio = (model.getEdited());
 				aggressionType.setEdited(fechaInicio);
 			}
-			if (model.getRemoveString() != null && !model.getRemoveString().isEmpty()) {
-				Date fechaInicio = Fecha.parseFecha(model.getRemoveString());
+			if (model.getRemove() != null ) {
+				Date fechaInicio = (model.getRemove());
 				aggressionType.setRemove(fechaInicio);
 			}
 			
