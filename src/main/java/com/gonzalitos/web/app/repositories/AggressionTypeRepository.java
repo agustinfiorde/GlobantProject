@@ -25,6 +25,9 @@ public interface AggressionTypeRepository extends JpaRepository<AggressionType, 
 	public Page<AggressionType> searchActivesByName(Pageable pageable, @Param("name") String name);
 	
 	@Query("SELECT a from AggressionType a WHERE a.remove IS NULL")
+	public List<AggressionType> searchActivesModel();
+	
+	@Query("SELECT a from AggressionType a WHERE a.remove IS NULL")
 	public Page<AggressionType> searchActives(Pageable pageable);
 
 	@Query("SELECT a from AggressionType a WHERE a.remove IS NULL ORDER BY a.name")

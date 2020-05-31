@@ -24,7 +24,9 @@ public class AggressorConverter extends OwnConverter<AggressorModel, Aggressor> 
 	public AggressorModel entityToModel(Aggressor entity) {
 		AggressorModel model = new AggressorModel();
 		try {
-			BeanUtils.copyProperties(entity, model);
+			if (entity != null) {
+				BeanUtils.copyProperties(entity, model);
+			}
 		} catch (Exception e) {
 			log.error("Error al convertir la entity en el modelo del Agresor", e);
 		}

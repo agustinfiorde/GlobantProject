@@ -32,8 +32,7 @@ public class EmergencyRestController {
 			if (ipAddress == null) {  
 			    ipAddress = request.getRemoteAddr();  
 			}
-			System.out.println("esta es la ip: " + ipAddress);
-//			 emergencyService.save(emergencyModel, ipAddress);
+			 emergencyService.save(emergencyModel, ipAddress);
 			return new ResponseEntity<>("", HttpStatus.OK);
 			
 		} catch (Exception e) {

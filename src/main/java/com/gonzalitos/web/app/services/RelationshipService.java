@@ -68,5 +68,9 @@ public class RelationshipService {
 	}
 		
 	
+	public List<RelationshipModel> toListModel(){
+		return relationshipConverter.entitiesToModels(relationshipRepository.searchActives());
+	}
+	
 		
 }

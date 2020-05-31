@@ -25,7 +25,7 @@ public interface HelpRequestRepository
 	@Query("SELECT a from HelpRequest a WHERE a.remove IS NULL")
 	public Page<HelpRequest> searchActives(Pageable pageable);
 
-	@Query("SELECT a from HelpRequest a WHERE a.remove IS NULL ORDER BY a.factTime")
+	@Query("SELECT a from HelpRequest a WHERE a.remove IS NULL ORDER BY a.factTimeString")
 	public List<HelpRequest> searchActives();
 
 	@Query("SELECT h from HelpRequest h, IN(h.victim) v, IN(h.aggressor) a "

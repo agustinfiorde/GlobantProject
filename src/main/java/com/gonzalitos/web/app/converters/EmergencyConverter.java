@@ -1,6 +1,7 @@
 package com.gonzalitos.web.app.converters;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.codehaus.jettison.json.JSONArray;
@@ -15,6 +16,7 @@ import com.gonzalitos.web.app.errors.WebException;
 import com.gonzalitos.web.app.models.EmergencyModel;
 import com.gonzalitos.web.app.repositories.EmergencyRepository;
 import com.gonzalitos.web.app.repositories.VictimRepository;
+import com.gonzalitos.web.app.utils.Fecha;
 
 
 @Component("EmergencyConverter")
@@ -51,6 +53,8 @@ public class EmergencyConverter  extends OwnConverter<EmergencyModel, Emergency>
 				victim.setName(model.getVictim().getName());
 				victim.setLastName(model.getVictim().getLastName());
 				victim.setDni(model.getVictim().getDni());
+				victim.setMembershipString(Fecha.formatFechaGuiones(new Date()));
+				victim.setPhone(model.getVictim().getPhone());
 				victim = victimRepository.save(victim);
 				emergency.setVictim(victim);
 				
@@ -58,6 +62,8 @@ public class EmergencyConverter  extends OwnConverter<EmergencyModel, Emergency>
 				emergency.getVictim().setName(model.getVictim().getName());
 				emergency.getVictim().setLastName(model.getVictim().getLastName());
 				emergency.getVictim().setDni(model.getVictim().getDni());
+				emergency.getVictim().setMembershipString(Fecha.formatFechaGuiones(new Date()));
+				emergency.getVictim().setPhone(model.getVictim().getPhone());
 			}
 			
 		} catch (Exception e) {
