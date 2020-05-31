@@ -27,9 +27,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.gonzalitos.web.app.entities.Emergency;
 import com.gonzalitos.web.app.entities.Victim;
 import com.gonzalitos.web.app.errors.WebException;
 import com.gonzalitos.web.app.models.VictimModel;
+import com.gonzalitos.web.app.services.EmergencyService;
 import com.gonzalitos.web.app.services.VictimService;
 
 @Controller
@@ -38,6 +40,9 @@ public class VictimController extends OwnController {
 	
 	@Autowired
 	private VictimService victimService;
+	
+	@Autowired
+	private EmergencyService emergencyService;
 	
 	public VictimController() {
 		super("victim-list", "victim-form");
@@ -101,13 +106,17 @@ public class VictimController extends OwnController {
 		ModelAndView modelo = new ModelAndView(listView);
 
 		Page<Victim> page = null;
+		Page<Emergency> pageE = null;
 		if (q == null || q.isEmpty()) {
 			page = victimService.toList(paginable);
+			pageE = emergencyService.toList(paginable);
 		} else {
 			page = victimService.toList(paginable, q);
+			pageE = emergencyService.toList(paginable, q);
 			modelo.addObject(QUERY_LABEL, q);
 		}
 		modelo.addObject(PAGE_LABEL, page);
+		modelo.addObject("emergency",pageE);
 
 		log.info("METODO: victim.toList() -- PARAMETROS: " + paginable);
 

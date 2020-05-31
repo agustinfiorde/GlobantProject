@@ -24,8 +24,8 @@ public interface EmergencyRepository extends JpaRepository<Emergency, String>, P
 	@Query("SELECT a from Emergency a WHERE a.remove IS NULL")
 	public Page<Emergency> searchActives(Pageable pageable);
 	
-	@Query("SELECT a from Emergency a WHERE a.remove IS NULL AND a.registered LIKE :registered")
-	public Page<Emergency> searchActives(Pageable pageable, @Param("registered") String registered);
+	@Query("SELECT e from Emergency e, IN(e.victim) v WHERE e.remove IS NULL AND v.name LIKE :q")
+	public Page<Emergency> searchActives(Pageable pageable, @Param("q") String q);
 	
 	@Query("SELECT a from Emergency a WHERE a.remove IS NULL")
 	public List<Emergency> searchActives();
