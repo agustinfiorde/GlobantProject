@@ -70,7 +70,7 @@
 											<th>Fecha del Incidente</th>
 											<th>Victima</th>
 											<th>Agresor</th>
-											<th>Descargar</th>
+<!-- 											<th>Descargar</th> -->
 									
 <!-- 											<th th:if="${url eq '/helprequest/papelera' or url eq '/helprequest/auditoria'}">Alta</th> -->
 <!-- 											<th th:if="${url eq '/helprequest/papelera' or url eq '/helprequest/auditoria'}">Modificación</th> -->
@@ -83,9 +83,9 @@
 											<td th:text="${objeto.factTimeString}">Fecha del Indicente</td>
 											<td th:text="${objeto.victim.name}+ ' ' +${objeto.victim.lastName}">Victima</td>
 											<td th:text="${objeto.aggressor.name}+ ' ' +${objeto.aggressor.lastName}">Agresor</td>
-											<td> 
-												<a th:href="@{/helprequest/pdf/_${objeto.id}_}">PDF</a>
-											</td>
+<!-- 											<td>  -->
+<!-- 												<a th:href="@{/helprequest/pdf/_${objeto.id}_}">PDF</a> -->
+<!-- 											</td> -->
 											
 
 <!-- 											<td th:if="${url eq '/helprequest/papelera' or url eq '/helprequest/auditoria'}" th:text="${objeto.fechaAlta} ? ${#dates.format(objeto.fechaAlta, 'dd-MM-yyyy HH:mm')}">Alta</td> -->
