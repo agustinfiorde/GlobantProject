@@ -81,12 +81,8 @@
 	</div>
 	<script type="text/javascript">
 	
-	$("#emergency")
-	.submit(
-			function(e) {
-
+	$("#emergency").submit(function(e) {
 				e.preventDefault();
-
 				var emergencyModel = {
 						address: $("#address").val(),
 						victim : {
@@ -98,50 +94,35 @@
 					
 				}
 
-				$
-						.ajax({
-							url : '/api/emergency/save',
-
-							data : JSON.stringify(emergencyModel),
-							dataType : 'json',
-							contentType : "application/json",
-							type : 'POST',
-							success : function(data) {
-								$("#messageEmergency").text(
-								"SU PEDIDO FUE REGISTRADO, A LA BREVEDAD ENVIAREMOS ASISTENCIA!");
-						$("#messageEmergency").css(
-								"color", "green");
-						setTimeout(
-								function() {
-									window.location.href = "/";
-								}, 2500);
-							},
-							error : function(data) {
-
-								if (data.status == 200) {
-									$("#messageEmergency").text(
-											"SU PEDIDO FUE REGISTRADO, A LA BREVEDAD ENVIAREMOS ASISTENCIA!");
-									$("#messageEmergency").css(
-											"color", "green");
-									setTimeout(
-											function() {
-												window.location.href = "/";
-											}, 2500);
-
-								} else {
-									$("#messageEmergency")
-											.text(
-													data.responseText
-															+ "!");
-									$("#mensajeEmmergency").css(
-											"color", "red");
-									console.log("ERROR");
-									console.log(data);
-								}
+				$.ajax({
+					url : '/api/emergency/save',
+					data : JSON.stringify(emergencyModel),
+					dataType : 'json',
+					contentType : "application/json",
+					type : 'POST',
+					success : function(data) {
+						$("#messageEmergency").text(
+						"SU PEDIDO FUE REGISTRADO, A LA BREVEDAD ENVIAREMOS ASISTENCIA!");
+						$("#messageEmergency").css("color", "green");
+						setTimeout(function() {
+						window.location.href = "/";
+						}, 2500);
+					},error : function(data) {
+						if (data.status == 200) {
+							$("#messageEmergency").text("SU PEDIDO FUE REGISTRADO, A LA BREVEDAD ENVIAREMOS ASISTENCIA!");
+							$("#messageEmergency").css("color", "green");
+							setTimeout(function() {
+								window.location.href = "/";
+							}, 2500);
+							} else {
+								$("#messageEmergency").text(data.responseText+ "!");
+								$("#mensajeEmmergency").css("color", "red");
+								console.log("ERROR");
+								console.log(data);
+							}
 
 							}
-						});
-
+					});
 				return false;
 			});
 	

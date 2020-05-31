@@ -29,10 +29,20 @@ function sendHelpRequest(){
 		type : 'POST',
 		data : JSON.stringify(helpRequestModel),
 		success : function(data) { 
-			console.log(data);
+			$("#modalAlerta").empty().html('<div class="alert alert-success" role="alert">'
+			  + 'Se envio el pedido de ayuada con exito!'
+			  + '</div>').show();
+			setTimeout(function() {
+				$("#modalAlerta").hide();
+			}, 5000);
 		},
 		error : function(data){
-			console.log(data);
+			$("#modalAlerta").empty().html('<div class="alert alert-danger" role="alert">'
+			  + 'Ocurrio un error al crear el pedido, Completa todos los campos para porde enviar el pedido de ayuda.'
+			  + '</div>').show();
+			setTimeout(function() {
+				$("#modalAlerta").hide();
+			}, 5000);
 		}
 	});
 	
@@ -45,7 +55,6 @@ function buildSelects(){
 		contentType : 'application/json', 
 		type : 'GET', 
 		success : function(data) { 
-			console.log(data);
 			$("#select1").empty();
 			if (data != null) {
 				var select1 =  '<label style="margin-top: 10px;">Tipo de maltrato</label>'
@@ -65,7 +74,6 @@ function buildSelects(){
 		contentType : 'application/json', 
 		type : 'GET', 
 		success : function(data) { 
-			console.log(data);
 			$("#select2").empty();
 			if (data != null) {
 				var select2 = '<label style="margin-top: 10px;">Tipo de relacion</label>'

@@ -24,39 +24,39 @@
 							<div class="form-row">
 								<div class="col-md-6 form-group">
 									<input type="text" name="name" class="form-control" id="name" placeholder="Nombre" data-rule="minlen:4"
-										data-msg="Por favor, ingrese al menos 4 letras" />
+									 	required="required"	data-msg="Por favor, ingrese al menos 4 letras" />
 									<div class="validate"></div>
 								</div>
 								<div class="col-md-6 form-group">
 									<input type="text" name="lastname" class="form-control" id="lastname" placeholder="Apellido" data-rule="minlen:4"
-										data-msg="Por favor, ingrese al menos 4 letras" />
+										required="required" data-msg="Por favor, ingrese al menos 4 letras" />
 									<div class="validate"></div>
 								</div>
 							</div>
 							<div class="form-group">
-								<input type="text" class="form-control" name="dni" id="dni" placeholder="DNI" data-rule="minlen:6"
-									data-msg="Por favor, ingrese un dni valido" />
+								<input type="number" class="form-control" name="dni" id="dni" placeholder="DNI" data-rule="minlen:6"
+								required="required"	data-msg="Por favor, ingrese un dni valido" />
 								<div class="validate"></div>
 							</div>
 							<div class="form-group">
-								<input type="date" class="form-control" name="dateBorn" id="dateBorn" />
+								<input type="date" required="required" class="form-control" name="dateBorn" id="dateBorn" />
 								<div class="validate"></div>
 							</div>
 							<div class="form-row">
 								<div class="col-md-6 form-group">
-									<input type="text" name="phone" class="form-control" id="phone" placeholder="Numero de Telefono" data-rule="minlen:8"
+									<input type="number" required="required" name="phone" class="form-control" id="phone" placeholder="Numero de Telefono" data-rule="minlen:8"
 										data-msg="Por favor, ingrese al menos 4 letras" />
 									<div class="validate"></div>
 								</div>
 								<div class="col-md-6 form-group">
-									<input type="text" name="email" class="form-control" id="email" placeholder="eMail" data-rule="email"
+									<input type="email" required="required" name="email" class="form-control" id="email" placeholder="eMail" data-rule="email"
 										data-msg="Por favor, ingrese un eMail valido" />
 									<div class="validate"></div>
 								</div>
 							</div>
 							<div class="form-row">
 								<div class="col-md-6 form-group">
-									<input type="number" name="children" class="form-control" id="children" placeholder="Cantidad de hijos" />
+									<input type="number" name="children" required="required" class="form-control" id="children" placeholder="Cantidad de hijos" />
 									<div class="validate"></div>
 								</div>
 
@@ -68,7 +68,7 @@
 							<!-- Agresor -->
 							<div class="form-row">
 								<div class="col-md-6 form-group">
-									<input type="text" name="nameAggressor" class="form-control" id="nameAggressor" placeholder="Nombre->Agresor" data-rule="minlen:4"
+									<input type="text" name="nameAggressor" required="required" class="form-control" id="nameAggressor" placeholder="Nombre->Agresor" data-rule="minlen:4"
 										data-msg="Por favor, ingrese al menos 4 letras" />
 									<div class="validate"></div>
 								</div>
@@ -80,41 +80,40 @@
 							</div>
 							<div class="form-row">
 								<div class="col-md-6 form-group">
-									<input type="text" name="lastNameAggressor" class="form-control" id="lastNameAggressor" placeholder="Apellido->Agresor" data-rule="minlen:4"
+									<input type="text" name="lastNameAggressor" required="required" class="form-control" id="lastNameAggressor" placeholder="Apellido->Agresor" data-rule="minlen:4"
 										data-msg="Por favor, ingrese al menos 4 letras" />
 									<div class="validate"></div>
 								</div>
 								<div class="col-md-6 form-group">
-									<input type="text" name="dniAggressor" class="form-control" id="dniAggressor" placeholder="DNI->Agresor" data-rule="minlen:4"
+									<input type="number" name="dniAggressor" class="form-control" required="required" id="dniAggressor" placeholder="DNI->Agresor" data-rule="minlen:4"
 										data-msg="Por favor, ingrese al menos 4 letras" />
 									<div class="validate"></div>
 								</div>
 							</div>
 
 							<div class="form-group">
-								<input type="text" class="form-control" name="address" id="address" placeholder="Direccion" data-rule="minlen:4"
+								<input type="text" required="required" class="form-control" name="address" id="address" placeholder="Direccion" data-rule="minlen:4"
 									data-msg="Por favor, ingrese una direccion valida" />
 									<div id="select1"></div>
 									<div id="select2"></div>	
 								<div class="validate"></div>
 							</div>
 							<div class="form-group">
-								<textarea class="form-control" id="description" rows="5" data-rule="required" data-msg="Please write something for us"
+								<textarea class="form-control" required="required" id="description" rows="5" data-rule="required" data-msg="Please write something for us"
 									placeholder="Descripcion del hecho"></textarea>
 								<div class="validate"></div>
 							</div>
 
-							<div class="form-group custom-file">
-								<input type="file" class="custom-file-input" id="customFile" /> 
-								<label class="custom-file-label" for="customFile">Seleccionar foto</label>
-							</div>
+<!-- 							<div class="form-group custom-file"> -->
+<!-- 								<input type="file" class="custom-file-input" id="customFile" />  -->
+<!-- 								<label class="custom-file-label" for="customFile">Seleccionar foto</label> -->
+<!-- 							</div> -->
 							<div class="mb-3">
-								<div class="loading">Loading</div>
-								<div class="error-message"></div>
-								<div class="sent-message">Tu pedido fue enviado con exito!</div>
+								<h3 id="messageEmergency"></h3>
 							</div>
+							<div id="modalAlerta"></div>
 							<div class="text-center">
-								<button type="button" onclick="sendHelpRequest()">Enviar Pedido</button>
+								<button type="button" class="btn btn-success pull-right" onclick="sendHelpRequest()">Enviar Pedido</button>
 							</div>
 						</form>
 					</div>
