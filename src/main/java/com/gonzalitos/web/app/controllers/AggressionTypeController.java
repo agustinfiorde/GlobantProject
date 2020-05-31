@@ -1,12 +1,12 @@
 package com.gonzalitos.web.app.controllers;
 
 import static com.gonzalitos.web.app.utils.Texts.ACCION_LABEL;
-import static com.gonzalitos.web.app.utils.Texts.AGGRESSOR_LABEL;
+import static com.gonzalitos.web.app.utils.Texts.AGGRESSION_TYPE_LABEL;
 import static com.gonzalitos.web.app.utils.Texts.ERROR;
+import static com.gonzalitos.web.app.utils.Texts.PAGE_LABEL;
+import static com.gonzalitos.web.app.utils.Texts.QUERY_LABEL;
 import static com.gonzalitos.web.app.utils.Texts.SAVE_LABEL;
 import static com.gonzalitos.web.app.utils.Texts.UNEXPECTED_ERROR;
-import static com.gonzalitos.web.app.utils.Texts.QUERY_LABEL;
-import static com.gonzalitos.web.app.utils.Texts.PAGE_LABEL;
 import static com.gonzalitos.web.app.utils.Texts.URL_LABEL;
 
 import javax.servlet.http.HttpSession;
@@ -44,7 +44,10 @@ public class AggressionTypeController extends OwnController {
 
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/save")
-	public String save(HttpSession session, @Valid @ModelAttribute(AGGRESSOR_LABEL) AggressionTypeModel m, BindingResult result, ModelMap modelo) {
+	public String save(HttpSession session, 
+			@Valid @ModelAttribute(AGGRESSION_TYPE_LABEL) AggressionTypeModel m, 
+			BindingResult result, 
+			ModelMap modelo) {
 		log.info("METODO: aggressionType.save() -- PARAMETROS: " + m);
 		try {
 			if (result.hasErrors()) {
@@ -64,7 +67,7 @@ public class AggressionTypeController extends OwnController {
 
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/delete")
-	public String delete(@ModelAttribute(AGGRESSOR_LABEL) AggressionTypeModel m, ModelMap model) {
+	public String delete(@ModelAttribute(AGGRESSION_TYPE_LABEL) AggressionTypeModel m, ModelMap model) {
 		log.info("METODO: aggressionType.delete() -- PARAMETROS: " + m);
 		model.addAttribute(ACCION_LABEL, "delete");
 		try {
@@ -89,7 +92,7 @@ public class AggressionTypeController extends OwnController {
 			aggressiontype = aggressiontypeService.search(id);
 		}
 
-		model.addObject(AGGRESSOR_LABEL, aggressiontype);
+		model.addObject(AGGRESSION_TYPE_LABEL, aggressiontype);
 		model.addObject(ACCION_LABEL, accion);
 		return model;
 	}
@@ -111,7 +114,7 @@ public class AggressionTypeController extends OwnController {
 		log.info("METODO: aggressionType.toList() -- PARAMETROS: " + paginable);
 
 		modelo.addObject(URL_LABEL, "/aggressiontype/list");
-		modelo.addObject(AGGRESSOR_LABEL, new AggressionTypeModel());
+		modelo.addObject(AGGRESSION_TYPE_LABEL, new AggressionTypeModel());
 		return modelo;
 	}
 

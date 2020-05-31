@@ -51,7 +51,7 @@
 						</div>
 						<div class="box-tools pull-right">
 
-							<a class="btn btn-xs btn-default" data-toggle="tooltip" title="Crear" th:href="@{/aggresiontype/form}" style="font-size: 25px; min-width: 40px;">
+							<a class="btn btn-xs btn-default" data-toggle="tooltip" title="Crear" th:href="@{/aggressiontype/form}" style="font-size: 25px; min-width: 40px;">
 								<i class="fa fa-plus"></i>
 							</a>
 						</div>
@@ -75,8 +75,8 @@
 									</thead>
 									<tbody>
 										<tr th:each="objeto : ${page}">
-											<td th:text="${objeto.numero}">Nombre</td>
-											<td th:text="${objeto.descripcion}">Descripcion</td>
+											<td th:text="${objeto.name}">Nombre</td>
+											<td th:text="${objeto.description}">Descripcion</td>
 											<td th:if="${url eq '/aggresiontype/papelera' or url eq '/aggresiontype/auditoria'}" th:text="${objeto.registeredString} ? ${#dates.format(objeto.registeredString, 'dd-MM-yyyy HH:mm')}">Alta</td>
 											<td th:if="${url eq '/aggresiontype/papelera' or url eq '/aggresiontype/auditoria'}" th:text="${objeto.editedString} ? ${#dates.format(objeto.editedString, 'dd-MM-yyyy HH:mm')}">Modificación</td>
 											<td th:if="${url eq '/aggresiontype/papelera' or url eq '/aggresiontype/auditoria'}" th:text="${objeto.removeString} ? ${#dates.format(objeto.removeString, 'dd-MM-yyyy HH:mm')}">Baja</td>

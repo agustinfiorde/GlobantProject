@@ -50,12 +50,12 @@
 							<strong>¡Alto!</strong> ¿Se encuentra seguro de que desea proceder con la recuperación del Tipo de Agresion?
 						</div>
 
-						<form class="vertical-form" id="formulario" method="POST" th:action="@{/aggressiontype/} + ${accion == null or accion == 'update' ? 'save' : accion}" th:object="${ods}">
+						<form class="vertical-form" id="formulario" method="POST" th:action="@{/aggressiontype/} + ${accion == null or accion == 'update' ? 'save' : accion}" th:object="${aggressiontype}">
 
 							<input type="hidden" class="form-control" th:field="*{id}" th:value="*{id}" />
 							
 							<div class="form-group">
-								<label for="name">Numero</label>
+								<label for="name">Nombre del tipo de violencia</label>
 								<input type="text" class="form-control" id="name" placeholder="Ingrese el nombre del Tipo de Agresion" th:field="*{name}" th:value="*{name}" th:disabled="${accion == 'delete'}" />
 							</div>
 

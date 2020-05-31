@@ -5,6 +5,7 @@ public final class Texts {
 	private Texts() {}
 	
 	public static final String AGGRESSOR_LABEL = "aggressor";
+	public static final String AGGRESSION_TYPE_LABEL = "aggressiontype";
 
 	public static final String ERROR = "error";
 	public static final String UNEXPECTED_ERROR = "unexpectederror";
