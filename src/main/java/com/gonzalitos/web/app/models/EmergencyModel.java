@@ -6,10 +6,8 @@ import lombok.Data;
 public class EmergencyModel {
 	
     private String id;
-//    private VictimModel victim;
+    private VictimModel victim;
     private String address;
-	private String ipAddress;
-	private String phone;
 	private String city;
 
 }
