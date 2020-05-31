@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/security/tags">
+<head>
+</head>
+<body>
+
+	<aside class="main-sidebar" th:fragment="menu">
+		<!-- sidebar: style can be found in sidebar.less -->
+		<section class="sidebar">
+			<!-- Sidebar user panel -->
+			<div class="user-panel" style="display: none;">
+				<div class="pull-left image">
+					<img src="/backend/img/avatar.png" class="img-circle" alt="User Image" />
+				</div>
+				<div class="pull-left info">
+					<p th:text="${session.usuario != null ? (session.usuario.nombre  + ' ' + session.usuario.apellido ): '' }"></p>
+					<a href="#">
+						<i class="fa fa-circle text-success"></i>
+						Online
+					</a>
+				</div>
+			</div>
+			
+			<!-- sidebar menu: : style can be found in sidebar.less -->
+			<ul class="sidebar-menu" data-widget="tree">
+				<li style="text-align:center; vertical-align:middle;margin-top: 15px;" th:text="${session.usuario != null ? (session.usuario.nombre  + ' ' + session.usuario.apellido ): '' }"></li>
+				
+				<hr style="margin-top:10px; margin-bottom:5px;"/>
+				
+				<li th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+					<a th:href="@{/helprequest/list}">
+						<i class="fa fa-hands-helping"></i>
+						<span>Pedidos de Ayuda</span>
+					</a>
+				</li>
+				
+				<li th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+					<a th:href="@{/victim/list}">
+						<i class="fa fa-users"></i>
+						<span>Victimas</span>
+					</a>
+				</li>
+				
+				<li th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+					<a th:href="@{/aggressor/list}">
+						<i class="fa fa-user-ninja"></i>
+						<span>Agresores</span>
+					</a>
+				</li>
+				
+				<hr style="margin-top:10px; margin-bottom:5px;"/>
+				
+				<li th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+					<a th:href="@{/aggressiontype/list}">
+						<i class="fa fa-circle"></i>
+						<span>Tipos de Violencia</span>
+					</a>
+				</li>
+				
+				<li th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+					<a th:href="@{/relationship/list}">
+						<i class="fa fa-circle"></i>
+						<span>Vinculos</span>
+					</a>
+				</li>
+				
+<!-- 				<hr style="margin-top:10px; margin-bottom:5px;"/> -->
+				
+<!-- 				<li th:if="${#authorization.expression('hasRole(''ADMIN'')')}"> -->
+<!-- 					<a th:href="@{/user/list}"> -->
+<!-- 						<i class="fa fa-users-cog"></i> -->
+<!-- 						<span>Gestion de Usuarios</span> -->
+<!-- 					</a> -->
+<!-- 				</li> -->
+
+			</ul>
+		</section>
+	</aside>
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/header :: head">
+</head>
+
+<body class="">
+
+	<div id="pantalla">
+		<div id="contenedor">
+			<section>
+				<div class="box1 pad1">
+					<h1 class="masthead-heading mb-0" th:text="${codigo}"></h1>
+					<h2 class="masthead-subheading mb-0" th:text="${mensaje == null ? 'Intenta nuevamente' : mensaje}"></h2>
+					<a href="/" class="btn btn-primary btn-xl rounded-pill mt-5">Volver</a>
+				</div>
+			</section>
+		</div>
+	</div>
+
+</body>
+
+</html>
