@@ -3,6 +3,7 @@ package com.gonzalitos.web.app.controllers;
 import static com.gonzalitos.web.app.utils.Texts.ACCION_LABEL;
 import static com.gonzalitos.web.app.utils.Texts.AGGRESSOR_LABEL;
 import static com.gonzalitos.web.app.utils.Texts.ERROR;
+import static com.gonzalitos.web.app.utils.Texts.HELPREQUEST_LABEL;
 import static com.gonzalitos.web.app.utils.Texts.PAGE_LABEL;
 import static com.gonzalitos.web.app.utils.Texts.QUERY_LABEL;
 import static com.gonzalitos.web.app.utils.Texts.SAVE_LABEL;
@@ -89,7 +90,7 @@ public class HelpRequestController extends OwnController {
 			helpRequest = helpRequestService.search(id);
 		}
 
-		model.addObject(AGGRESSOR_LABEL, helpRequest);
+		model.addObject(HELPREQUEST_LABEL, helpRequest);
 		model.addObject(ACCION_LABEL, accion);
 		return model;
 	}
@@ -115,7 +116,7 @@ public class HelpRequestController extends OwnController {
 		log.info("METODO: helpRequest.toList() -- PARAMETROS: " + paginable);
 
 		modelo.addObject(URL_LABEL, "/helprequest/list");
-		modelo.addObject(AGGRESSOR_LABEL, new HelpRequestModel());
+		modelo.addObject(HELPREQUEST_LABEL, new HelpRequestModel());
 		return modelo;
 	}
 }

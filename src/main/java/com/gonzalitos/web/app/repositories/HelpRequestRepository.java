@@ -13,24 +13,34 @@ import org.springframework.stereotype.Repository;
 import com.gonzalitos.web.app.entities.HelpRequest;
 
 @Repository
-public interface HelpRequestRepository extends JpaRepository<HelpRequest, String>, PagingAndSortingRepository<HelpRequest, String>  {
+public interface HelpRequestRepository
+		extends JpaRepository<HelpRequest, String>, PagingAndSortingRepository<HelpRequest, String> {
 
 	@Query("SELECT a from HelpRequest a WHERE a.remove IS NOT NULL")
 	public Page<HelpRequest> searchRemoved(Pageable pageable);
 
 	@Query("SELECT a from HelpRequest a")
 	public Page<HelpRequest> searchAll(Pageable pageable);
-	
+
 	@Query("SELECT a from HelpRequest a WHERE a.remove IS NULL")
 	public Page<HelpRequest> searchActives(Pageable pageable);
 
 	@Query("SELECT a from HelpRequest a WHERE a.remove IS NULL ORDER BY a.factTime")
 	public List<HelpRequest> searchActives();
-	
-	@Query("SELECT a from HelpRequest a WHERE a.remove IS NULL AND a.victim LIKE :victim_id")
-	public Page<HelpRequest> searchActives(Pageable pageable, @Param("victim_id") String victim_id);
-	
-//	@Query("SELECT a from HelpRequest a WHERE a.remove IS NULL AND a.victim LIKE :victim_id")
-//	public Page<HelpRequest> searchActives(Pageable pageable, @Param("victim_id") String victim_id);
-	
+
+	@Query("SELECT h from HelpRequest h, IN(h.victim) v, IN(h.aggressor) a "
+			+ "WHERE h.remove IS NULL "
+			+ "AND v.name LIKE :q "
+			+ "OR v.lastName LIKE :q "
+			+ "OR v.dni LIKE :q "
+			+ "OR v.phone LIKE :q "
+			+ "OR v.email LIKE :q "
+			+ "OR a.name LIKE :q "
+			+ "OR a.secondName LIKE :q "
+			+ "OR a.lastName LIKE :q "
+			+ "OR a.dni LIKE :q "
+			+ "OR h.factTime LIKE :q "
+			+ "ORDER BY h.factTime ")
+	public Page<HelpRequest> searchActives(Pageable pageable, @Param("q") String q);
+
 }

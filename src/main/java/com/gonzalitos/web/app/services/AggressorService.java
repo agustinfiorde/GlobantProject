@@ -49,9 +49,9 @@ public class AggressorService {
 		return aggressor;
 	}
 
-//	public Page<Aggressor> toList(Pageable paginable, String q) {
-//		return aggressorRepository.findActives(paginable, "%" + q + "%");
-//	}
+	public Page<Aggressor> toList(Pageable paginable, String q) {
+		return aggressorRepository.findActives(paginable, "%" + q + "%");
+	}
 
 	public Page<Aggressor> toList(Pageable paginable) {
 		return aggressorRepository.findActives(paginable);

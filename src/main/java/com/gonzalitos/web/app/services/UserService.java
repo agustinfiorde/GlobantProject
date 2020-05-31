@@ -16,6 +16,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +25,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.gonzalitos.web.app.converters.UserConverter;
 import com.gonzalitos.web.app.entities.User;
+import com.gonzalitos.web.app.enums.Roles;
 import com.gonzalitos.web.app.errors.WebException;
 import com.gonzalitos.web.app.models.UserModel;
 import com.gonzalitos.web.app.repositories.UserRepository;
@@ -109,6 +111,8 @@ public class UserService implements UserDetailsService{
 			user.setEmail("gonzalitos@gmail.com");
 			user.setName("Gonzalo");
 			user.setLastName("Sarmiento");
+			user.setRole(Roles.ADMIN);
+			user.setPassword(new BCryptPasswordEncoder().encode("asdasdasd"));
 			userRepository.save(user);
 		}
 	}

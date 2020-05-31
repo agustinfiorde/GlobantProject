@@ -3,10 +3,10 @@ package com.gonzalitos.web.app.controllers;
 import static com.gonzalitos.web.app.utils.Texts.ACCION_LABEL;
 import static com.gonzalitos.web.app.utils.Texts.AGGRESSOR_LABEL;
 import static com.gonzalitos.web.app.utils.Texts.ERROR;
+import static com.gonzalitos.web.app.utils.Texts.PAGE_LABEL;
+import static com.gonzalitos.web.app.utils.Texts.QUERY_LABEL;
 import static com.gonzalitos.web.app.utils.Texts.SAVE_LABEL;
 import static com.gonzalitos.web.app.utils.Texts.UNEXPECTED_ERROR;
-import static com.gonzalitos.web.app.utils.Texts.QUERY_LABEL;
-import static com.gonzalitos.web.app.utils.Texts.PAGE_LABEL;
 import static com.gonzalitos.web.app.utils.Texts.URL_LABEL;
 
 import javax.servlet.http.HttpSession;
@@ -103,7 +103,7 @@ public class AggressorController extends OwnController {
 		if (q == null || q.isEmpty()) {
 			page = aggressorService.toList(paginable);
 		} else {
-//			page = aggressorService.toList(paginable, q);
+			page = aggressorService.toList(paginable, q);
 			modelo.addObject(QUERY_LABEL, q);
 		}
 		modelo.addObject(PAGE_LABEL, page);
